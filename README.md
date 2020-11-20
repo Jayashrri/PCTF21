@@ -14,7 +14,8 @@
 [2015 CTFs](https://github.com/ctfs/write-ups-2015)  
 
 [CTF Book](https://trailofbits.github.io/ctf/)  
-[CTF Resources](https://ctfs.github.io/resources/)
+[CTF Resources](https://ctfs.github.io/resources/)  
+[bi0s](https://wiki.bi0s.in/)
 
 [OverTheWire](https://overthewire.org/wargames/)  
 [PicoCTF](https://picoctf.org/)
@@ -30,3 +31,7 @@
 
 ### Web
 [websec.fr](http://websec.fr/)
+
+### Forensics
+[ctf101](https://ctf101.org/forensics/overview/)  
+[Youtube](https://www.youtube.com/playlist?list=PL1H1sBF1VAKVPNh6Q8k1fpU97vhJc_c45)
