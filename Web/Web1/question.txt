@@ -1,0 +1,4 @@
+You are Sherlock Holmes. Your arch nemesis Jim Moriarty runs an online store.
+One of his employee has mistakenly entered the password in the product code field.
+Your job is to retrieve the 'admin' password from his website before the system admin deletes the data.
+You need to bypass the blind guard to the admin room.
