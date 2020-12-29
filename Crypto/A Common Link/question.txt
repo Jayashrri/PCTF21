@@ -1,0 +1,8 @@
+Your friend Rahul in an attempt to dual boot his system, crashed his hard disk containing his private key.
+
+Rahul asked you a favour to find his private key in return for the flag you are looking for which he locked in a safe.
+To extract information from the safe the following protocol must be followed:
+    1) A request for the information must be sent along with the user id within the specified format.
+    2) After the request is accepted, to get the flag the user id must be sent within the specified format.
+
+At the present moment, Rahul just has the request to be sent. Can you help him find his private key?
