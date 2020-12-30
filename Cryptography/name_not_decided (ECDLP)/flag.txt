@@ -1,3 +1,2 @@
-Here you go, a = 2
-23fcf62e4ca5319696cfcae39d75860c
 pctf{3111p71c_cur\/35_ar3_g00d_4_h3a17h}
+
