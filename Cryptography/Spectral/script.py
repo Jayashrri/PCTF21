@@ -60,6 +60,7 @@ def main() :
             "https://youtu.be/oDvD9rOGUSs",
             "https://youtu.be/6iFbuIpe68k",
             "https://youtu.be/hIputTTexwA",
+            "https://youtu.be/ZKV4GZTmfGM",
             "https://youtu.be/Qcp2W1-SFt4?t=14"]
     challenge = Challenge(key, iv, trolls)
     return challenge()
