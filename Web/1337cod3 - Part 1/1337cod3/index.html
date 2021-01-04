@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>1337cod3</title>
+    <link rel="stylesheet" data-name="vs/editor/editor.main"
+        href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+</head>
+
+<body>
+    <style>
+        html, body, #container {
+            color: white;
+            margin: 0;
+            padding: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: black;
+            height: 100%;
+        }
+        #console {
+            overflow: scroll;
+            height: 90%;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+    <div style="height: 100%; display: flex;">
+        <div style="width: 50vw; padding: 20px; word-wrap: break-word;">
+            <h1 style="color: aqua;">1337cod3</h1>
+            <h3>Problem Statement</h3>
+            <p>
+                The first line contains a number T. T test cases follow. Each test case has an integer N. Print the value of N!.
+                <br>
+                <h4>
+                    Constraints
+                </h4>
+                <ul>
+                    <li>T = 10</li>
+                    <li>N &lt; 10</li>
+                </ul>
+                <h4>
+                    Sample Input
+                </h4>
+                <p>1<br>1</p>
+                <h4>
+                    Sample Output
+                </h4>
+                <p>
+                    1
+                </p>
+                <h4>
+                    Execution Time
+                </h4>
+                <p>
+                    1 second
+                </p>
+                <h4>
+                    Submission instructions:
+                </h4>
+                <p>
+                    Take input from the file "input.txt" and write the output into "output.txt"
+                </p>
+                <h4>
+                    Allowed Languages:
+                </h4>
+                <p>
+                    C
+                </p>
+            </p>
+        </div>
+        <div style="height: 100%; width: 50vw;">
+            <div id="container" style="height: 70%;"></div>
+            <div style="height: 30%; display: flex;">
+                <div style="width: 80%; border:1px solid gray; padding: 10px">
+                    Console Output: <br>
+                    <div id="console" style="margin: 10px; font-family: monospace;"></div>
+                </div>
+                <button onclick="submit()" style="width: 20%; border:1px solid gray; padding: 10px; cursor: pointer;">
+                    Submit
+                </button>
+            </div>
+        </div>
+      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+    <script>
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
+        window.MonacoEnvironment = { getWorkerUrl: () => proxy };
+        let proxy = URL.createObjectURL(new Blob([`
+    self.MonacoEnvironment = {
+        baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+    };
+    importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+`], { type: 'text/javascript' }));
+        let editor;
+        require(["vs/editor/editor.main"], function () {
+            editor = monaco.editor.create(document.getElementById('container'), {
+                value: `#include <stdio.h>
+
+int main() {
+    return 0;
+}`,
+                language: 'c',
+                theme: 'vs-dark'
+            });
+        });
+        function submit() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/submit");
+            xmlhttp.setRequestHeader("Content-Type", "application/json");
+            xmlhttp.onload = function(e) {
+                if (this.status == 200) {
+                    document.getElementById('console').innerHTML = this.response;
+                } else {
+                    document.getElementById('console').innerHTML = `Error: ${this.response}`;
+                }
+            };
+            xmlhttp.send(JSON.stringify({code: editor.getValue()}));
+        }
+    </script>
+</body>
+
+</html>
