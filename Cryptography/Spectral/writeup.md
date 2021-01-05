@@ -58,7 +58,7 @@ data = ''.join(table[ch] for ch in data)
 
 data = ''.join(chr(int(data[i:i+8], 2)) for i in range(0, len(data), 8))
 print(data)
-#a7e3c780cebe32f7c7e20eb615a6fcdc
+#CBC IV = a7e3c780cebe32f7c7e20eb615a6fcdc
 ```
 
 So the encrypted hex string is encrypted using AES/CBC encryption and the initialization vector (iv) is given.
@@ -87,6 +87,8 @@ This way the problem of the server rejecting the actual ciphertext is resolved a
 ```python
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import unpad
+from base64 import b85decode
 
 with open("encrypted.txt", 'r') as f :
     ct = bytes.fromhex(f.read().strip())
@@ -115,8 +117,13 @@ for i in range(len(ct)//N) :
         mod_ct = bytes(mod_ct)
         pt += xor(x_key, decrypt(mod_ct)[i*N : (i+1)*N])
 
-pt = ''.join(chr(ch) for ch in pt if ch > 31)
+pt = unpad(pt, N)
+try :
+    while True :
+        pt = b85decode(pt)
+except :
+    pass
+pt = pt[1:].decode()
 print(pt)
-#Bra vo!! The flag is  pctf  {cut_743_BS_@nd_g1mm3_743 _f1@g}
+#pctf{cut_743_BS_@nd_g1mm3_743_f1@g}
 ```
-The flag is "pctf{cut_743_BS_@nd_g1mm3_743_f1@g}".
