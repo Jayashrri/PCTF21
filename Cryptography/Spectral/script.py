@@ -25,7 +25,6 @@ class Challenge :
             self.flag = b85encode(self.flag)
         self.flag = pad(self.flag, self.N)
         self.ct = AES.new(self.key, AES.MODE_CBC, self.iv).encrypt(self.flag)
-        print(self.ct.hex())
 
     def decrypt(self, encrypted) :
         return self.engine.decrypt(encrypted).hex()
