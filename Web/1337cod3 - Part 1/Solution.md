@@ -13,3 +13,7 @@ int main() {
     return 0;
 }
 ```
+
+### Console Output
+
+AC - Here's your flag: p_ctf{5ymlynk5_4_lyf_l0ng_l1v3_5ym1ynk5}

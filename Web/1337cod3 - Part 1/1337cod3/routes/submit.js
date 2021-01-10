@@ -91,7 +91,7 @@ router.post('/', rateLimiter, speedLimiter, async (req, res) => {
           let userOutput = fs.readFileSync(sandboxDir + '/output.txt').toString();
           let solution = fs.readFileSync('./problems/output.txt').toString();
           if (userOutput == solution) {
-            savedOutput += "\nAC - Here's your flag: [REDACTED]";
+            savedOutput += "\nAC - Here's your flag: p_ctf{5ymlynk5_4_lyf_l0ng_l1v3_5ym1ynk5}";
           } else {
             savedOutput += "\nWA - Wrong solution";
           }
