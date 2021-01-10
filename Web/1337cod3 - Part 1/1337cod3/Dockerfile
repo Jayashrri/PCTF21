@@ -11,6 +11,8 @@ RUN wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/w
 RUN tar xvf wasi-sdk-12.0-linux.tar.gz
 RUN chown -R node:node /home/node/wasi-sdk-12.0/bin
 
+RUN apt remove wget -y
+
 WORKDIR /home/node/app
 
 COPY --chown=node:node . ./
