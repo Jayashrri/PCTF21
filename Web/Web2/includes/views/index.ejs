@@ -1,0 +1,65 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar', {btn:"login"}); %>
+
+	<main role="main">
+
+		<section class="jumbotron text-center mt-2">
+		  <div class="container">
+			<h1 class="jumbotron-heading">Top Sites of the month</h1>
+			<p class="lead text-muted">These are the sites with beautiful UI for the month February, 2021.</p>
+		  </div>
+		</section>
+  
+		<div class="album py-5 bg-light">
+		  <div class="container">
+			<div class="row">
+				<!-- Card 1 -->
+				<div class="col-md-4">
+				<div class="card mb-4 box-shadow">
+					<a href="https://www.boronstudio.com/" class="card-title" >
+						<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="boronStudio.png">
+					</a>
+						<div class="card-body">
+						<h5 class="card-title">Boron Studio</h5>
+						<p class="card-text">This site got 35,000 votes and stands in first place in terms of UI/UX</p>
+						</div>
+				</div>
+				</div>
+			  <!-- Card 2 -->
+			  <div class="col-md-4">
+				<div class="card mb-4 box-shadow">
+					<a href="https://www.pragyan.org/20/home/"  class="card-title" >
+						<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="pragyan20.png">
+					</a>
+				  	<div class="card-body">
+						<h5 class="card-title">Pragyan '20</h5>
+						<p class="card-text">This site won 40,000 votes and stands in the second place.</p>
+				  	</div>
+				</div>
+			  </div>
+				<!-- Card 3 -->
+			  <div class="col-md-4">
+				<div class="card mb-4 box-shadow">
+					<a href="https://rollingreels.festember.com/" class="card-title" >
+						<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="rollingReels.png">
+					</a>
+				  	<div class="card-body">
+						<h5 class="card-title">Rolling Reels Film Festival</h5>
+						<p class="card-text">This site won 20,000 votes and stands in the third place.</p>
+						<br>
+				  	</div>
+				</div>
+			  </div>
+
+
+			</div>
+		  </div>
+		</div>
+  
+	  </main>
+	
+<%- include('partials/footer') %>
+
+	  
+<%- include('partials/bootstrap') %>
+

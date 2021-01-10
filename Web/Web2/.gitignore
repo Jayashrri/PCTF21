@@ -1,0 +1,5 @@
+node_modules
+default.json
+geckodriver.log
+mongoTest.py
+package-lock.json

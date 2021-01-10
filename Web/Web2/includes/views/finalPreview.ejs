@@ -1,0 +1,55 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar', {btn:"logout"}); %>
+
+<div class="container">
+    <h1 class="row">Employer's view</h1>
+    <p>Your interviewer will view this page before calling for interview.</p>
+    <form action="/jobs" class="container my-4" method="POST">
+        <div class="row my-2">
+            <label class="col-2"> Name  </label>
+            <input class="col-3" id="name" name="name" type="text" readonly>
+        </div>
+    <div class="row my-2">
+        <label class="col-2"> Date of Birth  </label>
+        <input class="col-3" id="dob" name="dob" type="text" readonly>
+    </div>
+    <div class="row my-2">
+        <label class="col-2"> Age  </label>
+        <p class="col-2" id="age"></p>
+    </div>
+    <div class="row my-2">
+        <label class="col-2"> Highest Education  </label>
+        <input class="col-3" id="education" name="education"  type="text" readonly>
+    </div>
+    <div class="row my-2">
+        <label class="col-2"> Previous Job Experience  </label>
+        <textarea class="col-3" id="job" name="job" readonly></textarea>
+    </div>
+    <div class="row justify-content-center">
+    <input type="submit" class="btn btn-success btn-sm col-2" id="submit" value="Final Submit">
+    </div>
+    </form>
+</div>
+
+<script>
+    function clean(s) {
+        if(s===null){
+            return s;
+        }
+        return s.replace(/\/?script|img|svg|onload|onerror|alert|iframe|<|>|javascript|\[|\]|alert|document|cookie|location/gmi, "").replace(/\//gim, "\\\/").replace(/\\/gmi,"\\");
+    }
+    let currentYear = String(new Date().getFullYear());
+    const urlParams = new URLSearchParams(window.location.search);
+    document.getElementById("name").value = clean(urlParams.get("name"));
+    document.getElementById("dob").value = clean(urlParams.get("dob"));
+    const cleanDate =clean(urlParams.get("dob")) ;
+    const year = cleanDate.split("-")[0];
+    
+    const age = eval(`${currentYear} - ${year}`);
+    document.getElementById("age").innerText = age;
+    document.getElementById("education").value = urlParams.get("education");
+    document.getElementById("job").value = urlParams.get("job");
+
+</script>
+    
+<%- include('partials/bootstrap') %>

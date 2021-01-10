@@ -19,7 +19,7 @@ services:
         restart: always
         container_name: apache_server
         ports:
-            - "8000:80"
+            - "9000:80"
         depends_on:
             - mysqldb
         volumes:

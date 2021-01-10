@@ -1,0 +1,30 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar', {btn:"logout"}); %>
+
+<div class="container">
+    <h1 class="row">Apply for Job</h1>
+    <form action="/finalpreview" class="container my-4" method="GET">
+        <div class="row my-2">
+            <label class="col-2"> Name  </label>
+            <input class="col-3" id="name" name="name" type="text" required>
+        </div>
+    <div class="row my-2">
+        <label class="col-2"> Date of Birth  </label>
+        <input class="col-3" id="dob" name="dob" type="date" required>
+    </div>
+    <div class="row my-2">
+        <label class="col-2"> Highest Education  </label>
+        <input class="col-3" id="education" name="education" type="text" required>
+    </div>
+    <div class="row my-2">
+        <label class="col-2"> Previous Job Experience  </label>
+        <textarea class="col-3" id="job" name="job" required></textarea>
+    </div>
+<div class="row justify-content-center" id="submitOptions">    
+    <input type="submit" class="btn btn-primary btn-sm col-2 mx-1" name="Preview" value="Preview Before Submit">
+    <input type="submit" class="btn btn-success btn-sm col-2 mx-1" name="finalSubmit" value="Final Submit" formaction="/jobs" formmethod="POST">
+</div>
+
+</form>
+
+

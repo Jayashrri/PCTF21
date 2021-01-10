@@ -1,0 +1,22 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar', {btn:"signup"}); %>
+
+<div class="container">
+    <h1 class="row">Login</h1>
+    <form action="/login" class="container my-4" method="POST">
+    <div class="row my-1">
+        <label class="col-2"> Email  </label>
+        <input class="col-3" name="email" type="email" required>
+    </div>
+    <div class="row my-1">
+        <label class="col-2"> Password  </label>
+        <input class="col-3" name="password" type="password" required>
+    </div>
+    <% if(typeof noUser!== 'undefined') { %>
+    <p style="color: red;">Invalid Username or Password</p>
+    <% } %>
+    <div class="row justify-content-center">
+    <input type="submit" class="btn btn-success btn-sm col-1" name="submit" value="Submit">
+    </div>
+    </form>
+
