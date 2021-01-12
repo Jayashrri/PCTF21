@@ -1,0 +1,7 @@
+includes/mongocontainer/mongodata
+default.json
+node_modules
+package-lock.json
+geckodriver.log
+mongoTest.py
+.prettierignore
