@@ -1,4 +1,4 @@
-We have been given :
+We have been given:
 * M - order of the finite field
 * G - Generator point
 * P - Point obtained on multiplying G with a scalar
@@ -17,7 +17,7 @@ If we consider this as a binary sequence with YES = 0 & NO = 1 and
 convert the sequence to a string, we get "Here you go, a = 2" which
 is the first parameter of the elliptic curve.
 
-Using M,a,G we can find out b also, through this equation :
+Using M,a,G we can find out b also, through this equation:
 ```
 y^2 = x^3 + ax + b mod M
 b = y^2 - x^3 - ax mod M
@@ -50,7 +50,7 @@ factors = [x[0]**x[1] for x in factor(G.order())]
 
 disc_logs = []
 
-for x in factors :
+for x in factors:
 	y = G.order()//x
 	disc_logs.append(discrete_logs(y*Q, y*P, operation='+'))
 
@@ -65,17 +65,17 @@ A possible solution might be to XOR the message and the scalar together and subm
 Luckily this works and we get the flag.
 
 ```python
-def xor(p, q) :
+def xor(p, q):
 	assert len(p) == len(q)
 	return bytes([p[i]^q[i] for i in range(len(p))])
 
 message = "LOL did you seriously think we would give up the flag that easy?"
 message = message.encode()
-message = [message[i : i+16] for i in range(0, len(message), 16)]
+message = [message[i: i+16] for i in range(0, len(message), 16)]
 scalar = bytes.fromhex("23fcf62e4ca5319696cfcae39d75860c")
 
 passwd = ''
-for i in range(len(message)) :
+for i in range(len(message)):
 	passwd += xor(scalar, message[i]).hex()
 
 print(passwd)

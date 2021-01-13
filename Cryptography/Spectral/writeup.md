@@ -4,13 +4,13 @@ Therefore it is obvious that the gibberish text is encoded in base85.
 ```python
 from base64 import base85decode
 
-with open('gibberish.txt', 'rb') as f :
+with open('gibberish.txt', 'rb') as f:
     data = f.read()
 
-try :
-    while True :
+try:
+    while True:
         data = b85decode(data)
-except :
+except:
     pass
 
 data = data[1:].decode()
@@ -21,7 +21,7 @@ print(data)
 Discard the null byte at the starting, its there just to prevent further base85 decoding of the text.
 The decoded text is the correct password for the zip file.
 
-This zip file contains two files :
+This zip file contains two files:
 * audio.wav
 * encrypted.txt
 
@@ -90,16 +90,16 @@ from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import unpad
 from base64 import b85decode
 
-with open("encrypted.txt", 'r') as f :
+with open("encrypted.txt", 'r') as f:
     ct = bytes.fromhex(f.read().strip())
 
 iv = bytes.fromhex("a7e3c780cebe32f7c7e20eb615a6fcdc")
 
-def xor(p, q) :
+def xor(p, q):
     assert len(p) == len(q)
     return bytes([p[i]^q[i] for i in range(len(p))])
 
-def decrypt(encrypted) :
+def decrypt(encrypted):
     # server communication
     # supply the iv (hex) if sending first block of ct
     return decrypted
@@ -108,20 +108,20 @@ N = AES.block_size
 x_key = get_random_bytes(N)
 pt = b''
 
-for i in range(len(ct)//N) :
+for i in range(len(ct)//N):
     mod_ct = list(ct)
-    if i == 0 :
-        pt += decrypt(ct[i*N : (i+1)*N])
-    else :
-        mod_ct[(i-1)*N : i*N] = list(xor(x_key, ct[(i-1)*N : i*N]))
+    if i == 0:
+        pt += decrypt(ct[i*N: (i+1)*N])
+    else:
+        mod_ct[(i-1)*N: i*N] = list(xor(x_key, ct[(i-1)*N: i*N]))
         mod_ct = bytes(mod_ct)
-        pt += xor(x_key, decrypt(mod_ct)[i*N : (i+1)*N])
+        pt += xor(x_key, decrypt(mod_ct)[i*N: (i+1)*N])
 
 pt = unpad(pt, N)
-try :
-    while True :
+try:
+    while True:
         pt = b85decode(pt)
-except :
+except:
     pass
 pt = pt[1:].decode()
 print(pt)
