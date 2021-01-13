@@ -1,0 +1,10 @@
+Well, your internship as sysadmin here at SuperSecure company has been going good so far, well except for your err.. questionable knowledge of tar commands but that's cool for now.
+Since we had to let go of our sysadmin due to 'trust issues', we're ready to offer you a job here after you complete your final internship task.
+We have captured some seemingly suspicious network traffic from some of our employees.
+Can you find out if they've been doing anything malicious and get yourself a job here?
+
+Flag format:
+Your flag is p_ctf{part1_part2_part3} where:
+part1 : MITRE ATT&CK sub-technique ID of the exploit/attack. Eg: part1 = T1000.001
+part2 : Name of the specific exploit/attack (not the category, be specific) being performed, lowercase, no spaces or special chars. Eg: If it is Abc's Ef-gh exploit, part2 = abcsefgh
+part3 : Information found in the packet, you'll know it when you see it.
