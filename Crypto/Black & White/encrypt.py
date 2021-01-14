@@ -10,8 +10,8 @@ def encrypt():
       
     # img1 and img2 are the 
     # two input images 
-    img1 = cv2.imread('hello.png') 
-    img2 = cv2.imread('qr_c.png') 
+    img1 = cv2.imread('flip_b.png') 
+    img2 = cv2.imread('b_L_b_T.png') 
       
     for i in range(img2.shape[0]): 
         for j in range(img2.shape[1]): 
@@ -25,8 +25,8 @@ def encrypt():
                 # Taking 4 MSBs of each image 
                 v3 = v1[:4] + v2[:4]  
                   
-                img1[i][j][l]= int(v3, 10) 
+                img1[i][j][l]= int(v3, 2) 
                   
-    cv2.imwrite('pt.png', img1) 
+    cv2.imwrite('full_b.png', img1) 
 	
 encrypt()
