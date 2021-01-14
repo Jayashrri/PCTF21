@@ -5,6 +5,6 @@ Can you find out if they've been doing anything malicious and get yourself a job
 
 Flag format:
 Your flag is p_ctf{part1_part2_part3} where:
-part1 : MITRE ATT&CK sub-technique ID of the exploit/attack. Eg: part1 = T1000.001
-part2 : Name of the specific exploit/attack (not the category, be specific) being performed, lowercase, no spaces or special chars. Eg: If it is Abc's Ef-gh exploit, part2 = abcsefgh
-part3 : Information found in the packet, you'll know it when you see it.
+part1 : MITRE ATT&CK sub-technique ID of the exploit/attack being performed in 1.pcap. Eg: part1 = T1000.001
+part2 : Name of the specific exploit/attack (not the category, be specific) being performed in 2.pcap, lowercase, no spaces or special chars. Eg: If it is Abc's Ef-gh exploit, part2 = abcsefgh
+part3 : Information that can be found in the packets of 3.pcap, you'll know it when you see it.
