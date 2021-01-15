@@ -1,0 +1,4 @@
+I've generated eight specific primes using the strings s1 and s2 and encrypted the flag using the script given below. Finding these may help you crack the flag!
+
+s1 = "JdTlUzWk"
+s2 = "HaOeHiDL"
