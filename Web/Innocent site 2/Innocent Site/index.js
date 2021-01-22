@@ -19,19 +19,12 @@ const speedLimiter = slowDown({
   skipFailedRequests: true
 });
 
-const GOOGLEBOT_RE = new RegExp('.*googlebot.*');
 const WEBLIGHT_RE = new RegExp('.*googleweblight.*');
 const FEEDBURNER_RE = new RegExp('.*FeedBurner\/1.0.*');
 const AMP_RE = new RegExp('.*Google\-AMPHTML.*');
 
 router.get('/', rateLimiter, speedLimiter, async function (req, res, next) {
-  if (req.headers.referer == 'https://www.google.com') {
-    res.sendFile(path.join(__dirname, 'pages/google_response.html'));
-  } else if (GOOGLEBOT_RE.test(req.headers['user-agent'])) {
-    res.sendFile(path.join(__dirname, 'pages/google_spam.html'));
-  } else if (req.headers.referer == 'https://t.co') {
-    res.sendFile(path.join(__dirname, 'pages/twitter_scam.html'));
-  } else if (AMP_RE.test(req.headers['user-agent'])) {
+  if (AMP_RE.test(req.headers['user-agent'])) {
     const ip = req.ip;
     if (ip) {
       if (ip.substr(0, 7) == "::ffff:") {
@@ -64,7 +57,7 @@ router.get('/', rateLimiter, speedLimiter, async function (req, res, next) {
       if (googlebot) {
         res.sendFile(path.join(__dirname, 'pages/weblight.html'));
       } else {
-        res.send('Hi impostor!');
+        res.send('Hi impostor! Now buy Google lol');
       }
     } else {
       res.send('Who are you?');
