@@ -23,7 +23,7 @@ const WEBLIGHT_RE = new RegExp('.*googleweblight.*');
 const FEEDBURNER_RE = new RegExp('.*FeedBurner\/1.0.*');
 const AMP_RE = new RegExp('.*Google\-AMPHTML.*');
 
-router.get('/', rateLimiter, speedLimiter, async function (req, res, next) {
+router.get('/index.html', rateLimiter, speedLimiter, async function (req, res, next) {
   if (AMP_RE.test(req.headers['user-agent'])) {
     const ip = req.ip;
     if (ip) {

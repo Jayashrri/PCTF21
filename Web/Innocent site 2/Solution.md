@@ -5,11 +5,12 @@ Visiting the site, it claims to be innocent. But the reports tell otherwise. Som
 There are two clues as to what is happening: 'Google news' and 'Slow internet'. 
 
 Using the first clue, Google news is generally aggregated by the googlebots these days. So we can try to access the page with googlebot's useragent like before. However, no luck this time.
-Coming to the second clue, news articles these days are served from Google's [AMP cache CDN](https://amp.dev) when internet speeds are slow. Searching a bit, it can be found that it this CDN caching is done by a bot with user agent 'Google-AMPHTML'. Now if we try to access the site with the bot's user agent we get 'Hi impostor! Now buy Google lol'. So we're in the right track, but the server figured out that the user-agent is spoofed and it isn't the actual bot that's making the request. However we can workaround that by sending the request through the bot itself. This can be done by calculating the AMP cache URL of the site (which can be done [here](https://amp.dev/documentation/guides-and-tutorials/learn/amp-caches-and-cors/amp-cache-urls/)). Accessing the AMP cache, we get the first part of the flag.
+
+Coming to the second clue, news articles these days are served from Google's [AMP cache CDN](https://amp.dev) when internet speeds are slow in Chrome. Searching a bit, it can be found that CDN caching is done by a bot with user agent 'Google-AMPHTML'. Now if we try to access the site with the bot's user agent we get 'Hi impostor! Now buy Google lol'. So we're in the right track, but the server figured out that the user-agent is spoofed and it isn't the actual bot that's making the request. However we can workaround that by sending the request through the bot itself. This can be done by calculating the AMP cache URL of the site (which can be done [here](https://amp.dev/documentation/guides-and-tutorials/learn/amp-caches-and-cors/amp-cache-urls/)). Accessing the AMP cache, we get the first part of the flag.
 
 ### Case 2:
 
-This is quite similar to the Case 1. Now by finding the user-agent of the feedburner bot (FeedBurner/1.0) and spoofing the request, you can get the second part of the flag.
+This is quite similar to the Case 1 of the previous chall. Now by finding the user-agent of the feedburner bot (FeedBurner/1.0) and spoofing the request, you can get the second part of the flag.
 
 ### Case 3:
 
