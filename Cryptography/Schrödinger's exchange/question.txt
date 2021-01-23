@@ -1,0 +1,8 @@
+Flat-earthers have finally found a flat planet and made an alliance with the corkamis (native alien race).
+Earth is under imminent attack and the only way to stop it is to nuke their mothership.
+Alice and Bob (you) are stationed at a missile launch facility on Earth.
+Alice's task is to launch the nukes but she needs the launch codes first. Help her find them.
+
+You and Alice will use a quantum communication channel using BB84 protocol.
+If you need some time to get the hang of this quantum thing, you are allowed to switch to a classical channel.
+Just send a 'SWITCH' to switch between quantum and classical channels. (only one switch is allowed)
