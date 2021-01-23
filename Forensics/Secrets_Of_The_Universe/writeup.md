@@ -3,7 +3,7 @@
  We are provided with an mkv(video) file. Now as the question alludes to, the data first needs to be split up into individual pieces, in this case pictures. This can be acheived with the help of a tool like ffmpeg
 
 ```
-ffmepg -i secrets.mkv ch_%d.png
+ffmpeg -i secrets.png ch_%d.png
 ```
 
 Now that the pictures are seperated, we can move onto the next part of the question. A major thing that is mentioned constantly is some **expensive ratio and its creator**, which alludes to the golden ratio, and by extension, the fibonacci series
@@ -19,3 +19,5 @@ Now that we have got this far, it is just a matter of running
 ```
 gifshuffle -C test.gif
 ```
+
+[gifshuffle running](includes/answer.png)
