@@ -20,4 +20,4 @@ Now that we have got this far, it is just a matter of running
 gifshuffle -C test.gif
 ```
 
-[gifshuffle running](includes/answer.png)
+![gifshuffle running](includes/answer.png)
