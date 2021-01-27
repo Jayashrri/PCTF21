@@ -6,7 +6,7 @@ We have three packet capture files. Let us look at them one by one:
 
 On opening the file in Wireshark and following the TCP stream, we can see that it is the traffic of a login page without SSL and the credentials being captured as well. On looking at the ARP packets, we notice abnormalities:
 
-![ARP](includes/arp.png)
+![ARP](https://imgur.com/J1HufHA.png)
 
 * The same MAC address has been assigned to different IPs.
 * The same IP has two different MAC address entries (Packet No. 56 and 64)
@@ -17,7 +17,7 @@ This is indicative of a Man in the Middle ARP Spoofing attack performed to captu
 
 On opening the file in Wireshark, we notice a lot of anomalous behaviour:
 
-![Keep-Alive](includes/keep-alive.png)
+![Keep-Alive](https://imgur.com/MPxI8Qp.png)
 
 * A large number of requests from different ports have been made in a short amount of time. All of these have unusual headers. This indicates a DoS attack.
 * They all have a repetitive pattern of making a three-way handshake and then sending a keep-alive signal.
@@ -32,7 +32,7 @@ On opening the file in Wireshark, we can see a lot of traffic. However, some of 
 
 On paying closer attention to the TLS certificate:
 
-![bogusCert](includes/bogus-cert.png)
+![bogusCert](https://imgur.com/OoQMk0G.png)
 
 We can see that the certificate has lengthy base64 encoding in the places of its DNSName SAN field. Let us decode it to see what it is:
 

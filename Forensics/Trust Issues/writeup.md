@@ -81,7 +81,7 @@ vol.py --plugins=carve_packets -f trustissues.raw --profile=Win7SP1x64 networkpa
 
 The packets are dumped at ```packets.pcap```. Let us open it in wireshark:
 
-![Wireshark](includes/wireshark.png)
+![Wireshark](https://imgur.com/7lFkFwh.png)
 
 We can see that there is a pattern of query responses of DNS TXID = 2 followed by a Server failure (as it does not correspond to any IP; but note that it is enough for the data to reach the attacker's name server as a query) of TXID = 3 and a No such name response of TXID = 1. Hence for filtering out the hex data, ```dns.id == 2``` is a sufficient filter in our case.
 
