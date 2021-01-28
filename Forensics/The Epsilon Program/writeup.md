@@ -75,8 +75,8 @@ Duration                        : 0:00:43
 
 Again we can infer from the capitalisation that it has something to do with LSB. We have established that the sacred ones are prime numbers, so the first line should be talking about palindromes of such nature. One more thing we need to take note from the exif data is that this is a stereo audio, as indicated by the `Num Channels` value. Hence the mention of *right* in the question should pertain to audio from the right channel.
 
-The [Wave](http://soundfile.sapp.org/doc/WaveFormat/) file format consists of data chunks with bytes known as frame bytes. In a stereo audio, the bytes in the odd position (even index, if starting from 0) correspond to the left channel and the ones even position correspong to the right channel. Two such frame bytes make up one frame.
-Hence, our final script for extracting the LSBs of frames at prime palindrome positions should be something like this:
+The [Wave file format](https://wavefilegem.com/how_wave_files_work.html) consists of data chunks with bytes known as frame bytes. In a stereo audio, the bytes in the odd positions (even index, if starting from 0) correspond to the left channel and the ones in the even positions correspond to the right channel. Two such frame bytes make up one frame.
+Hence, our final script for extracting the LSBs of frames at prime palindrome positions from the right channel should be something like this:
 
 ```python
 import wave
