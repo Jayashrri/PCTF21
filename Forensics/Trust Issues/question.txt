@@ -1,0 +1,4 @@
+Just few days after hiring the new employee Mark, some confidential information about the company has been leaked out despite the company's odd way of protecting their important documents.
+On enquiring the suspect Mark, he pinpoints his finger towards the company sysadmin, who he said seemed 'fishy' while setting up his new computer.
+Can you figure out if anything has been leaked from Mark's system? If so what was it?
+You have been given a memory dump of his computer taken just after installation and an apparently crucial document from his computer as well.
