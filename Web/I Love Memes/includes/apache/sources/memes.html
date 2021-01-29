@@ -1,0 +1,121 @@
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+   10
+   11
+   12
+   13
+   14
+   15
+   16
+   17
+   18
+   19
+   20
+   21
+   22
+   23
+   24
+   25
+   26
+   27
+   28
+   29
+   30
+   31
+   32
+   33
+   34
+   35
+   36
+   37
+   38
+   39
+   40
+   41
+   42
+   43
+   44
+   45
+   46
+   47
+   48
+   49
+   50
+   51
+   52
+   53
+   54
+   55
+   56
+   57
+   58
+   59
+   60</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span> <span style="color: #007020">session_start</span>();  
+   
+   <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span><span style="color: #007020">isset</span>(<span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&quot;loggedin&quot;</span>]) <span style="color: #333333">&amp;&amp;</span> <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&quot;loggedin&quot;</span>]<span style="color: #333333">!==</span><span style="background-color: #fff0f0">&quot;y&quot;</span>){
+       header(<span style="background-color: #fff0f0">&quot;Location: index.php&quot;</span>);
+   }
+   <span style="color: #557799">?&gt;</span>
+   
+   <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;header.php&quot;</span>; <span style="color: #557799">?&gt;</span>
+   &lt;div class=&quot;container&quot;&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;div class=&quot;col text-center&quot;&gt;
+               &lt;h1&gt;m3m3Flix&lt;/h1&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+   &lt;/div&gt;
+   
+   &lt;div class=&quot;container&quot; style=&quot;border:4px solid green; border-radius: 10px&quot;&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;div class=&quot;col&quot;&gt;
+           &lt;h2 style=&quot;color: green&quot;&gt;Free Memes&lt;/h2&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row justify-content-center&quot;&gt;
+           &lt;img src=&quot;images/brit.webp&quot; class=&quot;col-8&quot; width=&quot;500px&quot; height=&quot;600px&quot;  &gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row justify-content-center&quot;&gt;
+           &lt;img src=&quot;images/america.webp&quot; class=&quot;col-6&quot; width=&quot;500px&quot; height=&quot;600px&quot;  &gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row justify-content-center&quot;&gt;
+           &lt;img src=&quot;images/essay.webp&quot; class=&quot;col-5&quot; width=&quot;500px&quot; height=&quot;600px&quot;  &gt;
+       &lt;/div&gt;
+   &lt;/div&gt;
+   
+   
+   &lt;div class=&quot;container&quot; style=&quot;border:4px solid gold; border-radius: 10px&quot; &gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;div class=&quot;col&quot;&gt;
+               &lt;h2&gt; Premium memes &lt;/h2&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+       <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&#39;isPremium&#39;</span>] <span style="color: #333333">===</span><span style="background-color: #fff0f0">&#39;0&#39;</span> )<span style="color: #333333">:</span> <span style="color: #557799">?&gt;</span>
+       &lt;!-- Buy premium --&gt;
+       &lt;div class=&quot;row text-center&quot;&gt;
+           &lt;h3  class=&quot;col&quot; style=&quot;color: red&quot;&gt; Please &lt;a href=&quot;buy.php&quot;&gt;purchase&lt;/a&gt;  paid version to unlock the premium memes. We have the best meme content. &lt;/h3&gt;
+       &lt;/div&gt;
+       &lt;!-- Premium meme --&gt;
+       <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">else</span><span style="color: #333333">:</span> <span style="color: #557799">?&gt;</span>
+       <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;paidMemes.php&quot;</span> <span style="color: #557799">?&gt;</span>
+       <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">endif</span>; <span style="color: #557799">?&gt;</span>
+   &lt;/div&gt;
+   &lt;div class=&quot;container&quot;&gt;
+       &lt;div class=&quot;row justify-content-center&quot;&gt;
+           &lt;div class=&quot;col-1 my-5&quot;&gt;
+               &lt;a href=&quot;logout.php&quot; class=&quot;btn btn-primary&quot;&gt;Logout&lt;/a&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+   &lt;/div&gt;
+   <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;footer.php&quot;</span>; <span style="color: #557799">?&gt;</span>
+   
+   &lt;!-- /sources/memes.html --&gt;
+   </pre></td></tr></table></div>
+   
