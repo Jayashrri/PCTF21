@@ -1,4 +1,4 @@
 mysql-connector-python==8.0.23
 flask==1.1.2
-pycryptodome==3.9.8
+pycryptodome==3.9.9
 numpy==1.19.5
