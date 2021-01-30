@@ -19,18 +19,18 @@ bits = [random.choice('01') for _ in range(1024)]
 basis = [random.choice('+x') for _ in range(1024)]
 
 params = {'bits': bits, 'basis': basis}
-response = requests.get('http://localhost:4000/polarize', json=params)
+response = requests.get('http://example.com:xxxx/polarize', json=params)
 photons = json.loads(response.text)['photons']
 
 params = {'photons': photons, 'basis': basis}
-response = requests.get('http://localhost:4000/flag', json=params)
+response = requests.get('http://example.com:xxxx/flag', json=params)
 data = json.loads(response.text)
 
 server_basis = data['basis']
 flag = data['flag']
 
 params = {'bits': bits, 'basis_1': basis, 'basis_2': server_basis}
-response = requests.get('http://localhost:4000/sharedkey', json=params)
+response = requests.get('http://example.com:xxxx/sharedkey', json=params)
 key = json.loads(response.text)['key']
 
 key = b64decode(key.encode())
@@ -48,7 +48,7 @@ Lets make a GET request once more and see it more closely.
 
 ```python
 params = {'photons': photons, 'basis': basis}
-response = requests.get('http://localhost:4000/flag', json=params)
+response = requests.get('http://example.com:xxxx/flag', json=params)
 data = json.loads(response.text)
 
 print(response.headers)
@@ -72,7 +72,7 @@ What do we do with that text? Maybe it will spook the eavesdropper!
 ```python
 params = {'photons': photons, 'basis': basis}
 headers = {'I-See-What-You-Did-There': 'blah'}
-response = requests.get('http://localhost:4000', json=params, headers=headers)
+response = requests.get('http://example.com:xxxx', json=params, headers=headers)
 data = json.loads(response.text)
 
 print(response.headers)
@@ -88,7 +88,7 @@ That's what the `X-Forwarded-For` HTTP header does. We can spoof our IP address 
 ```python
 params = {'photons': photons, 'basis': basis}
 headers = {'I-See-What-You-Did-There': 'blah', 'X-Forwarded-For': '127.0.0.1'}
-response = requests.get('http://localhost:4000', json=params, headers=headers)
+response = requests.get('http://example.com:xxxx', json=params, headers=headers)
 data = json.loads(response.text)
 
 print(response.headers)
@@ -163,22 +163,22 @@ This is just what we needed!! Eavesdropper's basis. Now we can calculate the enc
 ```python
 # eavesdropper intercepts our photons and measures them with e_basis
 params = {'photons': photons, 'basis': e_basis}
-response = requests.get('http://localhost:4000/measure', json=params)
+response = requests.get('http://example.com:xxxx/measure', json=params)
 e_bits = json.loads(response.text)['bits']
 
 # eavesdropper polarizes the e_bits with e_basis
 params = {'bits': e_bits, 'basis': e_basis}
-response = requests.get('http://localhost:4000/polarize', json=params)
+response = requests.get('http://example.com:xxxx/polarize', json=params)
 e_photons = json.loads(response.text)['photons']
 
 # server receives e_photons and measures them with server_basis
 params = {'photons': e_photons, 'basis': server_basis}
-response = requests.get('http://localhost:4000/measure', json=params)
+response = requests.get('http://example.com:xxxx/measure', json=params)
 server_bits = json.loads(response.text)['bits']
 
 # server calculates the shared key with server_bits, server_basis and basis
 params = {'bits': server_bits, 'basis_1': server_basis, 'basis_2': basis}
-response = requests.get('http://localhost:4000/sharedkey', json=params)
+response = requests.get('http://example.com:xxxx/sharedkey', json=params)
 server_key = json.loads(response.text)['key']
 
 server_key = b64decode(server_key.encode())
