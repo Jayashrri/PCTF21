@@ -1,0 +1,3 @@
+mysql-connector-python==8.0.23
+bcrypt==3.2.0
+string-color==1.2.1
