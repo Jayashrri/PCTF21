@@ -18,7 +18,7 @@ ARG ADMIN_PASSWORD
 RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && \
     echo $TIMEZONE > /etc/timezone && \
     apt-get update && \
-    apt-get -y install openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass
+    apt-get -y install --no-install-recommends openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass
 
 RUN rm /etc/ssh/sshd_config
 
@@ -39,7 +39,8 @@ COPY shell ./shell
 
 WORKDIR /home/$USERNAME/shell
 
-RUN pip3 install -r requirements.txt && \
+RUN pip3 install --upgrade pip && \
+    pip3 install -r requirements.txt && \
     jq ".db.host = \"$DB_HOSTNAME\"" config.json | sponge config.json && \
     jq ".db.user = \"$DB_USERNAME\"" config.json | sponge config.json && \
     jq ".db.password = \"$DB_PASSWORD\"" config.json | sponge config.json && \

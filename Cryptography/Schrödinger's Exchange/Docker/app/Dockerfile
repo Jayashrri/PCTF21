@@ -18,7 +18,7 @@ COPY app ./app
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get -y install jq moreutils && \
+    apt-get -y install --no-install-recommends jq moreutils && \
     pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
     chmod +x app.py && \
