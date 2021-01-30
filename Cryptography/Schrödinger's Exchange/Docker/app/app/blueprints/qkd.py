@@ -84,9 +84,9 @@ def distribute():
                 if is_local:
 
                     db = key_distribution_blueprint.config['db']
-                    icecream = ''.join(sample(urandom(64).hex(), 64))
+                    icecream = make_icecream()
                     while not db.save(icecream, e_basis):
-                        icecream = ''.join(sample(urandom(64).hex(), 64))
+                        icecream = make_icecream()
 
                     ssh_password = key_distribution_blueprint.config['ssh_password']
                     response.headers["Eavesdropper-Bounced-But-Dropped-His-Icecream"] = icecream
