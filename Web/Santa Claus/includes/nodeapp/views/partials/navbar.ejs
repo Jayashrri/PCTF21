@@ -1,0 +1,13 @@
+<nav class="nav navbar navbar-dark bg-dark">
+
+    <a class=" col-4 text-center navbar-brand text-white" href="/">Beautiful Sites</a>
+    <div class="btn-group">
+      <% if(btn==="login" ) { %>
+      <a href="/login" class="btn-sm btn-secondary mx-3" style="text-decoration: none;">Login</a>
+      <% } else if(btn==="logout") { %>
+      <a href="/logout" class="btn-sm btn-secondary mx-3" style="text-decoration: none;">Logout</a>
+      <% } else { %>
+        <a href="/signup" class="btn-sm btn-secondary mx-3" style="text-decoration: none;">Signup</a>
+      <% } %>
+    </div>
+  </nav>

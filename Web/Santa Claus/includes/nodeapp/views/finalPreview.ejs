@@ -1,0 +1,63 @@
+<%- include('partials/header'); %> <%- include('partials/navbar',{btn:"logout"}); %>
+
+<div class="container">
+	<h1 class="row"><strong>Application Details</strong></h1>
+	<p id="preview"></p>
+	<div class="container my-4">
+		<h6 class="row"><strong>Personal Details</strong></h6>
+		<div class="row my-2">
+			<p class="col-3">Applicant name:</p>
+			<p class="col-2" id="name"></p>
+		</div>
+		<div class="row my-2">
+			<p class="col-3">Date of Birth of Applicant:</p>
+			<p class="col-2" id="dob"></p>
+		</div>
+		<div class="row my-2">
+			<p class="col-2">Age of Applicant:</p>
+			<p class="col-2" id="age"></p>
+		</div>
+		<h6 class="row"><strong>Educational Qualifications</strong></h6>
+		<div class="row my-2">
+			<p class="col-2">Highest Education:</p>
+			<p class="col-2" id="education"></p>
+		</div>
+		<h6 class="row"><strong>Jobs Details</strong></h6>
+		<div class="row my-2">
+			<p class="col-2">Previous Job Experience:</p>
+			<textarea class="col-3" id="job" name="job" readonly></textarea>
+		</div>
+	</div>
+    <form action="/jobs" class="container my-4" method="POST">
+		<div class="row my-2" hidden>
+			<label class="col-2"> Name </label>
+			<input class="col-3" id="nameform" name="name" type="text" required />
+		</div>
+		<div class="row my-2" hidden>
+			<label class="col-2"> Date of Birth </label>
+			<input class="col-3" id="dobform" name="dob" type="date" required />
+		</div>
+		<div class="row my-2" hidden>
+			<label class="col-2"> Highest Education </label>
+			<input class="col-3" id="educationform"	name="education" type="text" required/>
+		</div>
+		<div class="row my-2" hidden>
+			<label class="col-2"> Previous Job Experience </label>
+			<textarea class="col-3" id="jobform" name="job" required></textarea>
+		</div>
+		<div class="row justify-content-center" id="submitOptions" >
+			<input type="submit" id="userSubmit" class="btn btn-success btn-sm col-2 mx-1" name="finalSubmit" value="Final Submit" hidden/>
+        </div>
+        <div class="row justify-content-center" id="adminOptions" hidden>
+            <input type="submit" class="btn btn-success btn-sm col-2 mx-1" id="jobAccept" name="jobAccept" value="Accept Job" />
+            <input type="submit" class="btn btn-danger btn-sm col-2 mx-1" id="jobReject" name="jobReject" value="Reject Job" />
+        </div>
+	</form>
+</div>
+
+<script src="js/filter.js"></script>
+<script src="js/jwtDecode.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/populatePage.js"></script>
+
+<%- include('partials/bootstrap') %>
