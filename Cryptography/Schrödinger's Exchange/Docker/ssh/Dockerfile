@@ -18,7 +18,7 @@ ARG ADMIN_PASSWORD
 RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && \
     echo $TIMEZONE > /etc/timezone && \
     apt-get update && \
-    apt-get -y install openssh-server python3-pip jq moreutils fail2ban rsyslog sshpass
+    apt-get -y install openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass
 
 RUN rm /etc/ssh/sshd_config
 
