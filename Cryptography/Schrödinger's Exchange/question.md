@@ -53,14 +53,6 @@ def verify_bits(bits):
     except:
         return False
 
-def verify_key_size(key_size):
-    try:
-        assert isinstance(key_size, int)
-        assert key_size > 0
-        return True
-    except:
-        return False
-
 def polarize_photons(bits, basis):
     return []
 
