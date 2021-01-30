@@ -31,7 +31,7 @@ I used [wavepad](https://www.nch.com.au/wavepad/index.html) for this purpose.
 
 Viewing the wave in Freuency View (log scale) gives -
 
-![Hidden Message](./images/hidden-message.png)
+![Hidden Message](./img/hidden-message.png)
 
 It says "ADRENALINE-SAITO-GUAM-THAI" which rhymes with "ADENINE-CYTOSINE-GUANINE-THYMINE".
 These are amino acids in out DNA so it is pointing towards [DNA Cryptography](https://www.geeksforgeeks.org/dna-cryptography/).
@@ -73,7 +73,7 @@ For this we will have to decrypt the whole ciphertext.
 
 We will take help of a property of AES/CBC decryption -
 
-![AES/CBC Property](./images/cbc-property.png)
+![AES/CBC Property](./img/cbc-property.png)
 
 In AES/CBC, after decrypting a block of ciphertext with the key, it is XORed with the previous ciphertext block to get the plaintext block.
 We make use of this and the above property to decrypt the ciphertext without having the actual encryption key itself.
