@@ -2,19 +2,20 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from os.path import dirname, realpath, join
+from json import load
 from base64 import b85encode
-import random
 from signal import SIGINT, signal
+import random
 import sys
 
 class Challenge:
 
-    def __init__(self, key, iv, trolls):
+    def __init__(self, key, iv, flag, trolls):
         self.key = bytes.fromhex(key)
         self.iv = bytes.fromhex(iv)
+        self.flag = flag
         self.trolls = trolls
         self.N = AES.block_size
-        self.flag_file = join(dirname(realpath(__file__)), 'flag.txt')
 
     def welcome(self):
         print("*"*50)
@@ -22,8 +23,7 @@ class Challenge:
         print("*"*50)
 
     def magic(self):
-        with open(self.flag_file, 'rb') as f:
-            self.flag = b'\x00' + f.read().strip()
+        self.flag = self.flag.encode()
         for i in range(12):
             self.flag = b85encode(self.flag)
         self.flag = pad(self.flag, self.N)
@@ -77,18 +77,13 @@ def handler(sig, frame):
     sys.exit(0)
 
 def main():
-    key = "daeae618228c1b6e4be24c795dbf9b473dad4e89ee9711be7cb9b4993bce239d"
-    iv = "a7e3c780cebe32f7c7e20eb615a6fcdc"
-    trolls = ["https://github.com/mikewazowski-ctf/cryptography-1/",
-              "https://github.com/mikewazowski-ctf/cryptography-2/",
-              "https://github.com/mikewazowski-ctf/cryptography-3/",
-              "https://github.com/mikewazowski-ctf/cryptography-4/",
-              "https://github.com/mikewazowski-ctf/cryptography-5/",
-              "https://github.com/mikewazowski-ctf/cryptography-6/",
-              "https://github.com/mikewazowski-ctf/cryptography-7/"]
+    cwd = dirname(realpath(__file__))
+    config_file = join(cwd, 'config.json')
+    data = load(open(config_file, 'r'))
+    data = [data[i] for i in data.keys()]
 
     signal(SIGINT, handler)
-    Challenge(key, iv, trolls).run()
+    Challenge(*data).run()
 
 
 if __name__ == '__main__':

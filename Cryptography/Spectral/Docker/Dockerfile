@@ -4,13 +4,12 @@ ARG PORT=4000
 ARG MAX_CONNECTIONS=30
 ARG IDLE_TIME=30
 
-RUN apt-get update && \
-    apt-get -y install --no-install-recommends ncat lsof
-
 COPY app /app
 WORKDIR /app
 
-RUN pip3 install --upgrade pip && \
+RUN apt-get update && \
+    apt-get -y install --no-install-recommends ncat lsof && \
+    pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
     sed -i "s/port/$PORT/g" startup.sh && \
     sed -i "s/max/$MAX_CONNECTIONS/g" startup.sh && \
