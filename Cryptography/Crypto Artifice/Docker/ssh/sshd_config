@@ -1,0 +1,21 @@
+Port 22
+Protocol 2
+
+HostKey /home/username/.ssh/ssh_host_rsa_key
+HostKey /home/username/.ssh/ssh_host_dsa_key
+HostKey /home/username/.ssh/ssh_host_ecdsa_key
+HostKey /home/username/.ssh/ssh_host_ed25519_key
+
+LoginGraceTime 1m
+PermitRootLogin no
+StrictModes yes
+
+PubkeyAuthentication yes
+#RSAAuthentication yes
+PasswordAuthentication yes
+PermitEmptyPasswords no
+#UsePAM yes
+
+X11Forwarding no
+PrintMotd no
+PrintLastLog no
