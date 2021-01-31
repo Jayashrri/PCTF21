@@ -1,6 +1,8 @@
 #!/usr/local/bin/python3
 from random import randrange
 from sympy import isprime
+from os.path import dirname, realpath, join
+from json import load
 from signal import SIGINT, signal
 import sys
 
@@ -130,14 +132,13 @@ def handler(sig, frame):
 	sys.exit(0)
 
 def main():
-	M = 310717010502520989590157367261876774703
-	params = [2, 3]
-	G = (179210853392303317793440285562762725654, 105268671499942631758568591033409611165)
-	P = (280810182131414898730378982766101210916, 291506490768054478159835604632710368904)
-	url = "https://drive.google.com/file/d/1C-s0ZsEtfcwA8zV3hzpjsCAsEn5Q6s_r/view?usp=sharing"
+	cwd = dirname(realpath(__file__))
+	config_file = join(cwd, 'config.json')
+	data = load(open(config_file, 'r'))
+	data = [data[i] for i in data.keys()]
 
 	signal(SIGINT, handler)
-	Challenge(M, params, G, P, url).run()
+	Challenge(*data).run()
 
 
 if __name__ == '__main__':
