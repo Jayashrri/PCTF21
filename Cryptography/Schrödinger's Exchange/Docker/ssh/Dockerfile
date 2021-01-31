@@ -15,23 +15,21 @@ ARG ADMIN_USERNAME
 ARG ADMIN_EMAIL
 ARG ADMIN_PASSWORD
 
-RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && \
-    echo $TIMEZONE > /etc/timezone && \
-    apt-get update && \
-    apt-get -y install --no-install-recommends openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass
-
-RUN rm /etc/ssh/sshd_config
-
 COPY sshd_config /etc/ssh
 COPY jail.local /etc/fail2ban
 COPY startup.sh /root
 
-RUN chmod +x /root/startup.sh && \
+RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && \
+    echo $TIMEZONE > /etc/timezone && \
+    apt-get update && \
+    apt-get -y install --no-install-recommends openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass && \
+    chmod +x /root/startup.sh && \
     sed -i "s/username/$USERNAME/g" /root/startup.sh && \
     sed -i "s/username/$USERNAME/g" /etc/ssh/sshd_config && \
     useradd -m $USERNAME && \
     echo "root:$ROOT_PASSWORD" | chpasswd && \
     echo "$USERNAME:$USER_PASSWORD" | chpasswd
+
 
 WORKDIR /home/$USERNAME
 
