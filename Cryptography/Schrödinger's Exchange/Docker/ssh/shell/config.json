@@ -1,0 +1,16 @@
+{
+    "db": {
+        "host": "",
+        "user": "",
+        "password": "",
+        "database": "",
+        "port": "",
+        "id_table": "",
+        "icecream_table": ""
+    },
+    "admin": {
+        "username": "",
+        "email": "",
+        "password": ""
+    }
+}

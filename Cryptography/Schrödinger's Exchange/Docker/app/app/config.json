@@ -1,0 +1,17 @@
+{
+    "app": {
+        "host": "",
+        "port": "",
+        "flag": "",
+        "image_url": "",
+        "ssh_password": ""
+    },
+    "db": {
+        "host": "",
+        "user": "",
+        "password": "",
+        "database": "",
+        "port": "",
+        "icecream_table": ""
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "key": "daeae618228c1b6e4be24c795dbf9b473dad4e89ee9711be7cb9b4993bce239d",
+    "iv": "a7e3c780cebe32f7c7e20eb615a6fcdc",
+    "flag": "p_ctf{cut_743_BS_@nd_g1mm3_743_f1@g}",
+    "trolls": [
+        "https://github.com/mikewazowski-ctf/cryptography-1/",
+        "https://github.com/mikewazowski-ctf/cryptography-2/",
+        "https://github.com/mikewazowski-ctf/cryptography-3/",
+        "https://github.com/mikewazowski-ctf/cryptography-4/",
+        "https://github.com/mikewazowski-ctf/cryptography-5/",
+        "https://github.com/mikewazowski-ctf/cryptography-6/",
+        "https://github.com/mikewazowski-ctf/cryptography-7/"
+    ]
+}

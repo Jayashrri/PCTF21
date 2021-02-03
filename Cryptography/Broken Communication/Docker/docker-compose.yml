@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  nc:
+    build:
+      context: .
+      args:
+        - NCAT_HOST_PORT
+    image: "${NCAT_IMAGE_NAME}:${NCAT_IMAGE_TAG}"
+    container_name: "${NCAT_CONTAINER_NAME}"
+    restart: always
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    ports:
+      - "${NCAT_HOST_PORT}:${NCAT_CONTAINER_PORT}"

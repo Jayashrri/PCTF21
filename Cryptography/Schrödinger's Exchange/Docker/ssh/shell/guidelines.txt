@@ -1,0 +1,19 @@
+
+------------------------------ sniffer-force.onion -----------------------------
+
+Want to do nasty stuff with quantum computers?
+Welcome to the sniffers' hangout!
+
+General guidelines:
+
+    *   You can perform 4 actions: "signup", "signin", "signout", "exit".
+    *   Strictly follow the command format given below.
+    *   username & password should be at least 5 characters long.
+    *   username should not contain any special characters. 
+    *   Enclose username, email and password in quotation marks.
+    *   Signup action- signup "<username>" "<email>" "<password>"
+    *   Signin action- signin "<username>" "<password>"
+    *   Signout action- signout
+    *   Exit action- exit
+
+--------------------------------------------------------------------------------

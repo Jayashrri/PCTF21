@@ -1,0 +1,79 @@
+version: '3.8'
+services:
+  db:
+    build:
+      context: ./db
+      args:
+        - DB_NAME
+        - DB_USERNAME
+        - DB_PASSWORD
+    image: "${DB_IMAGE_NAME}:${DB_IMAGE_TAG}"
+    container_name: "${DB_HOSTNAME}"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+  app:
+    build:
+      context: ./app
+      args:
+        - APP_HOSTNAME
+        - APP_CONTAINER_PORT
+        - FLAG
+        - IMAGE_URL
+        - USER_PASSWORD
+        - DB_HOSTNAME
+        - DB_USERNAME
+        - DB_PASSWORD
+        - DB_NAME
+        - DB_PORT
+        - DB_ICECREAM_TABLE
+    image: "${APP_IMAGE_NAME}:${APP_IMAGE_TAG}"
+    container_name: "${APP_CONTAINER_NAME}"
+    depends_on:
+      - db
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    ports:
+      - "${APP_HOST_PORT}:${APP_CONTAINER_PORT}"
+  ssh:
+    build:
+      context: ./ssh
+      args:
+        - TIMEZONE
+        - USERNAME
+        - ROOT_PASSWORD
+        - USER_PASSWORD
+        - DB_HOSTNAME
+        - DB_USERNAME
+        - DB_PASSWORD
+        - DB_NAME
+        - DB_PORT
+        - DB_ID_TABLE
+        - DB_ICECREAM_TABLE
+        - ADMIN_USERNAME
+        - ADMIN_EMAIL
+        - ADMIN_PASSWORD
+    image: "${SSH_IMAGE_NAME}:${SSH_IMAGE_TAG}"
+    container_name: "${SSH_CONTAINER_NAME}"
+    depends_on:
+      - db
+      - app
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "${SSH_HOST_PORT}:${SSH_CONTAINER_PORT}"
+networks:
+  default:
+    name: "${NETWORK_NAME}"
+    driver: bridge
