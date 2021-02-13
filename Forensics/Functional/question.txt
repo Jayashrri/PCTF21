@@ -1,0 +1,7 @@
+  My friend is being really tough nowadays man. He is currently entered this phase where he is just obsessed with the whole idea of purely functional stuff. Like, just last week, I was lamenting about my whole debacle with version control, and this idiot chimes in about how if only my system was a little bit more functional and didn't break all the time. The nerve of this guy. It just seems to be a never ending stream of pretentious man. Not only that, his need for function has caused him to be a real pain nowadays too.
+
+  Just a few days ago, a colleague of ours, due to his constant work, was diagnosed with RSI, and instead of showing some sympathy, got into this whole monologue of the way better alternative layouts that could have reduced the long movements that caused his disease. That was the end of the line man.
+
+  We had been at odds after that incident, but yesterday, he gave emailed a folder, and told me that he was sorry, and this was his way of making an apology. Now, that folder is just a bunch of random junk from what I can see. But, if there really is something in there, could you help me uncover it?
+
+NOTE: Wrap flag in p_ctf{}
