@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  ssh:
+    build:
+      context: ./ssh
+      args:
+        - TIMEZONE
+        - USERNAME
+        - ROOT_PASSWORD
+        - USER_PASSWORD
+    image: "${SSH_IMAGE_NAME}:${SSH_IMAGE_TAG}"
+    container_name: "${SSH_CONTAINER_NAME}"
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    ports:
+      - "${SSH_HOST_PORT}:${SSH_CONTAINER_PORT}"
