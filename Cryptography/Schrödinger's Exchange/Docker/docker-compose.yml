@@ -25,6 +25,8 @@ services:
         - DB_ROOT_PASSWORD
         - DB_ICECREAM_TABLE
     image: pctf21_schrodinger_app:latest
+    volumes:
+      - ./logs/app:/root/app/logs
     depends_on:
       - db
     restart: always
@@ -51,6 +53,8 @@ services:
         - ADMIN_EMAIL
         - ADMIN_PASSWORD
     image: pctf21_schrodinger_ssh:latest
+    volumes:
+      - ./logs/ssh:/home/${SSH_USERNAME}/shell/logs
     depends_on:
       - db
       - app

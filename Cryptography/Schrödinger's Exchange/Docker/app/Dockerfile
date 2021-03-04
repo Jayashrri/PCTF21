@@ -8,11 +8,12 @@ ARG DB_ROOT_PASSWORD
 ARG DB_ICECREAM_TABLE
 ARG USER_PASSWORD
 
-COPY app ./app
+COPY app /root/app
 
-WORKDIR /app
+WORKDIR /root/app
 
-RUN apt-get update && \
+RUN mkdir logs && \
+    apt-get update && \
     apt-get -y install --no-install-recommends jq moreutils && \
     pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
@@ -24,8 +25,8 @@ RUN apt-get update && \
     jq ".db.password = \"$DB_ROOT_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.icecream_table = \"$DB_ICECREAM_TABLE\"" config.json | sponge config.json
 
-WORKDIR /
+WORKDIR /root
 
 ENTRYPOINT ["python3"]
 
-CMD ["/app/app.py"]
+CMD ["/root/app/app.py"]

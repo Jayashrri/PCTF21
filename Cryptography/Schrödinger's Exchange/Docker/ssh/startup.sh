@@ -1,5 +1,9 @@
 #!/bin/bash
 
+username=$(ls -ad -- /home/* | cut -d/ -f3)
+path="/home/$username/shell"
+chown -R $username: $path
+
 service ssh start
 
 service rsyslog start
