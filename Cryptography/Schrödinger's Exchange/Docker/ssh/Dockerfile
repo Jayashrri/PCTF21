@@ -4,8 +4,8 @@ ARG SSH_TIMEZONE
 ARG SSH_USERNAME
 ARG SSH_ROOT_PASSWORD
 ARG SSH_USER_PASSWORD
-ARG DB_PASSWORD
 ARG DB_NAME
+ARG DB_ROOT_PASSWORD
 ARG DB_ID_TABLE
 ARG DB_ICECREAM_TABLE
 ARG ADMIN_USERNAME
@@ -38,8 +38,8 @@ WORKDIR /home/$SSH_USERNAME/shell
 
 RUN pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
-    jq ".db.password = \"$DB_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.database = \"$DB_NAME\"" config.json | sponge config.json && \
+    jq ".db.password = \"$DB_ROOT_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.id_table = \"$DB_ID_TABLE\"" config.json | sponge config.json && \
     jq ".db.icecream_table = \"$DB_ICECREAM_TABLE\"" config.json | sponge config.json && \
     jq ".admin.username = \"$ADMIN_USERNAME\"" config.json | sponge config.json && \

@@ -1,2 +1,2 @@
 CREATE DATABASE IF NOT EXISTS db_name;
-GRANT ALL PRIVILEGES ON db_name.* TO 'db_username'@'%' IDENTIFIED BY 'db_password';
+GRANT ALL PRIVILEGES ON db_name.* TO 'root'@'%' IDENTIFIED BY 'db_password';

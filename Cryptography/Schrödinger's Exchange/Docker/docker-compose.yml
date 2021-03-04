@@ -5,8 +5,7 @@ services:
       context: ./db
       args:
         - DB_NAME
-        - DB_USERNAME
-        - DB_PASSWORD
+        - DB_ROOT_PASSWORD
     image: pctf21_schrodinger_db:latest
     restart: always
     environment:
@@ -22,8 +21,8 @@ services:
         - FLAG
         - IMAGE_URL
         - USER_PASSWORD
-        - DB_PASSWORD
         - DB_NAME
+        - DB_ROOT_PASSWORD
         - DB_ICECREAM_TABLE
     image: pctf21_schrodinger_app:latest
     depends_on:
@@ -44,8 +43,8 @@ services:
         - SSH_USERNAME
         - SSH_ROOT_PASSWORD
         - SSH_USER_PASSWORD
-        - DB_PASSWORD
         - DB_NAME
+        - DB_ROOT_PASSWORD
         - DB_ID_TABLE
         - DB_ICECREAM_TABLE
         - ADMIN_USERNAME
