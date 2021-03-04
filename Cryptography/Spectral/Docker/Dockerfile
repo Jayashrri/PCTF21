@@ -7,4 +7,4 @@ RUN mkdir /root/app && \
 
 ENTRYPOINT ["/bin/bash"]
 
-CMD ["/app/startup.sh"]
+CMD ["/root/app/startup.sh"]
