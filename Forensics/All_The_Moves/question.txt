@@ -1,0 +1,3 @@
+To say I have been struggling recently would be a huge understatement. I have been getting completely crushed by this MVL dude for a long time. I had almost given up hope, until I found a very interesting file on his computer when he wasn't around. I know for a fact that they contain data on stuff he does, and I feel could help me, but I have no idea what they mean. Can you help me decode them?
+
+NOTE - wrap flag in p_ctf{}
