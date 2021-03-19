@@ -12,6 +12,7 @@ RUN apt -y remove --purge python3.4 && \
 #    --recv-keys "$key"; keys+=("$key"); fi; done && \
     apt-get update && \
     apt-get -y --no-install-recommends install python3.7 python3-pip build-essential file && \
+    apt-get -y autoremove && \
     useradd -m ${JAIL_USERNAME} && \
     echo "root:${ROOT_PASSWORD}" | chpasswd && \
     echo "${JAIL_USERNAME}:${JAIL_USER_PASSWORD}" | chpasswd && \

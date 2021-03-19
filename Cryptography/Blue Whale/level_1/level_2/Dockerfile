@@ -14,6 +14,7 @@ RUN apt -y remove --purge python3.4 && \
 #    --recv-keys "$key"; keys+=("$key"); fi; done && \
     apt-get update && \
     apt-get -y --no-install-recommends install sudo python3.7 python3-pip && \
+    apt-get -y autoremove && \
     useradd -m ${SHELL_USERNAME} && \
     useradd -m ${JAIL_USERNAME} && \
     echo "root:${ROOT_PASSWORD}" | chpasswd && \

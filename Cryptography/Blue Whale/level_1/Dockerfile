@@ -22,6 +22,7 @@ RUN printf "\n============================================================" && \
 #    --recv-keys "$key"; keys+=("$key"); fi; done && \
     apt-get update && \
     apt-get -y --no-install-recommends install python3.7 python3-pip && \
+    apt-get -y autoremove && \
     useradd -m ${SSH_USERNAME} && \
     useradd -m ${JAIL_USERNAME} && \
     echo "root:${SSH_ROOT_PASSWORD}" | chpasswd && \
