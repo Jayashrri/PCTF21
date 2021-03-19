@@ -1,8 +1,7 @@
 #!/bin/bash
 
-username=$(ls -ad -- /home/* | cut -d/ -f3)
-path="/home/$username/shell"
-chown -R $username: $path
+path="/home/username/shell"
+chown -R username: $path
 
 service ssh start
 
@@ -12,5 +11,3 @@ service rsyslog start
 sshpass -p 'abcd' ssh -o StrictHostKeyChecking=no username@localhost
 
 service fail2ban start
-
-/bin/bash
