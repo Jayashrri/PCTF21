@@ -1,0 +1,2 @@
+def play():
+    return True
