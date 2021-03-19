@@ -20,7 +20,7 @@ ls() {
     if [[ "$@" == *"/"* ]] || [[ "$@" == *".."* ]]; then
         showonscreen "rbash: ls: restricted"
     else
-        output=$(uncoversecrets --color=auto "$@" 2>&1)
+        output=$(uncoversecrets --color=always "$@" 2>&1)
         if [ $? -eq 0 ]; then
             showonscreen ${output//uncoversecrets/ls}
         else
@@ -35,9 +35,9 @@ cat() {
     else
         output=$(meowmeow "$@" 2>&1)
         if [ $? -eq 0 ]; then
-            showonscreen ${output//meowmeow/cat}
+            showonscreen "${output//meowmeow/cat}"
         else
-            showonscreen ${output//meowmeow/cat} 1>&2
+            showonscreen "${output//meowmeow/cat}" 1>&2
         fi
     fi
 }
@@ -46,15 +46,15 @@ file() {
     output=$(whatareyou "$@" 2>&1)
     exit_code=$?
     if [ $# -eq 0 ]; then
-        showonscreen ${output//whatareyou/file} 1>&2
+        showonscreen "${output//whatareyou/file}" 1>&2
     elif [ $# -eq 1 ]; then
         if [[ "$@" == "-"* ]] || [[ "$@" == *"/"* ]] || [[ "$@" == *".."* ]]; then
             showonscreen "rbash: file: restricted"
         else
             if [ $exit_code -eq 0 ]; then
-                showonscreen ${output//whatareyou/file}
+                showonscreen "${output//whatareyou/file}"
             else
-                showonscreen ${output//whatareyou/file} 1>&2
+                showonscreen "${output//whatareyou/file}" 1>&2
             fi
         fi
     else
