@@ -75,6 +75,11 @@ file() {
     return $exit_code
 }
 
+refuse() {
+    showonscreen "rbash: $1: restricted" 1>&2
+    return 1
+}
+
 export PATH=$HOME/commands
 export PS1='${debian_chroot:+($debian_chroot)}\[\e[1;32m\]cobb@\h\[\e[1;00m\]:\[\e[1;36m\]\w\[\e[1;00m\]:\[\e[1;31m\]\$\[\e[00m\] '
 
@@ -85,15 +90,16 @@ readonly PWD
 readonly HOME
 readonly SHELL
 
-alias sudo='showonscreen "rbash: sudo: restricted" 1>&2'
-alias shopt='showonscreen "rbash: shopt: restricted" 1>&2'
-alias export='showonscreen "rbash: export: restricted" 1>&2'
-alias set='showonscree "rbash: set: restricted" 1>&2'
-alias unset='showonscreen "rbash: unset: restricted" 1>&2'
-alias command='showonscreen "rbash: command: restricted" 1>&2'
+alias sudo='refuse sudo'
+alias shopt='refuse shopt'
+alias export='refuse export'
+alias set='refuse set'
+alias unset='refuse unset'
+alias command='refuse command'
+alias eval='refuse eval'
+alias echo='refuse echo'
+alias printf='refuse printf'
 alias pwd='showonscreen "/home/cobb/jail"'
-alias echo='showonscreen "rbash: echo: restricted" 1>&2'
-alias printf='showonscreen "rbash: printf: restricted" 1>&2'
 alias bash='startshell'
 alias sh='startshell'
 
