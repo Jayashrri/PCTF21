@@ -12,8 +12,7 @@ COPY app /root/app
 
 WORKDIR /root/app
 
-RUN mkdir logs && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y install --no-install-recommends jq moreutils && \
     pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \

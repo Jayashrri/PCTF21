@@ -36,8 +36,7 @@ COPY shell ./shell
 
 WORKDIR /home/$SSH_USERNAME/shell
 
-RUN mkdir logs && \
-    pip3 install --upgrade pip && \
+RUN pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
     jq ".db.database = \"$DB_NAME\"" config.json | sponge config.json && \
     jq ".db.password = \"$DB_ROOT_PASSWORD\"" config.json | sponge config.json && \
