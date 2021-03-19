@@ -10,7 +10,7 @@ import logging
 
 def create_logger():
     cwd = dirname(realpath(__file__))
-    log_file = join(cwd, 'logs.txt')
+    log_file = join(cwd, 'app.log')
 
     logger = logging.getLogger()
     log_formatter = logging.Formatter("*"*30 + "\n%(asctime)s - %(name)s - %(levelname)s - %(message)s - %(funcName)s - line %(lineno)d\n")

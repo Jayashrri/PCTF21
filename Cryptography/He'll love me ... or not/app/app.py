@@ -125,7 +125,7 @@ class Challenge:
 			answer = int(input(f'\nSECRET KEY (hex): '), 16)
 			assert self.P.xy() == self.G.multiply(answer).xy()
 			self.endgame()
-		except AssertionError:
+		except:
 			print("\nOOPS! Keep trying ...\n")
 
 def handler(sig, frame):

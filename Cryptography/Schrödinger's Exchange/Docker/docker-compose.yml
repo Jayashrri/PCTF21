@@ -5,75 +5,67 @@ services:
       context: ./db
       args:
         - DB_NAME
-        - DB_USERNAME
-        - DB_PASSWORD
-    image: "${DB_IMAGE_NAME}:${DB_IMAGE_TAG}"
-    container_name: "${DB_HOSTNAME}"
+        - DB_ROOT_PASSWORD
+    image: pctf21_schrodinger_db:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${DB_NAME}"
-      MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_USER: root
+      MYSQL_PASSWORD: "${DB_ROOT_PASSWORD}"
+  
   app:
     build:
       context: ./app
       args:
-        - APP_HOSTNAME
-        - APP_CONTAINER_PORT
         - FLAG
         - IMAGE_URL
         - USER_PASSWORD
-        - DB_HOSTNAME
-        - DB_USERNAME
-        - DB_PASSWORD
         - DB_NAME
-        - DB_PORT
+        - DB_ROOT_PASSWORD
         - DB_ICECREAM_TABLE
-    image: "${APP_IMAGE_NAME}:${APP_IMAGE_TAG}"
-    container_name: "${APP_CONTAINER_NAME}"
+    image: pctf21_schrodinger_app:latest
+    volumes:
+      - ./logs/app.log:/root/app/app.log
     depends_on:
       - db
     restart: always
-    stdin_open: true
-    tty: true
     environment:
       DEBIAN_FRONTEND: noninteractive
     ports:
-      - "${APP_HOST_PORT}:${APP_CONTAINER_PORT}"
+      - "4000:80"
+  
   ssh:
     build:
       context: ./ssh
       args:
-        - TIMEZONE
-        - USERNAME
-        - ROOT_PASSWORD
-        - USER_PASSWORD
-        - DB_HOSTNAME
-        - DB_USERNAME
-        - DB_PASSWORD
+        - SSH_TIMEZONE
+        - SSH_USERNAME
+        - SSH_ROOT_PASSWORD
+        - SSH_USER_PASSWORD
         - DB_NAME
-        - DB_PORT
+        - DB_ROOT_PASSWORD
         - DB_ID_TABLE
         - DB_ICECREAM_TABLE
         - ADMIN_USERNAME
         - ADMIN_EMAIL
         - ADMIN_PASSWORD
-    image: "${SSH_IMAGE_NAME}:${SSH_IMAGE_TAG}"
-    container_name: "${SSH_CONTAINER_NAME}"
+    image: pctf21_schrodinger_ssh:latest
+    volumes:
+      - ./logs/ssh.log:/home/${SSH_USERNAME}/shell/shell.log
     depends_on:
       - db
       - app
     restart: always
-    stdin_open: true
     tty: true
     environment:
       DEBIAN_FRONTEND: noninteractive
     cap_add:
       - NET_ADMIN
     ports:
-      - "${SSH_HOST_PORT}:${SSH_CONTAINER_PORT}"
+      - "4001:22"
+
 networks:
   default:
-    name: "${NETWORK_NAME}"
+    name: pctf21_schrodinger
     driver: bridge
