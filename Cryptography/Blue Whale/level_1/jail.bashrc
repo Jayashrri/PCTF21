@@ -187,7 +187,6 @@ export PS1='${debian_chroot:+($debian_chroot)}\[\e[1;32m\]cobb@\h\[\e[1;00m\]:\[
 readonly PATH
 readonly PS1
 readonly USER
-readonly PWD
 readonly HOME
 readonly SHELL
 

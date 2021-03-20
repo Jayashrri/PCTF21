@@ -1,4 +1,4 @@
-#build time: 12min
+#build time: 16min
 version: '3.3'
 services:
   level1:
