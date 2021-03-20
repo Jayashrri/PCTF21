@@ -19,6 +19,7 @@ start: $(target)
 stop:
 	@docker-compose --file level_1/docker-compose.yml down
 	@chattr -R -i level_1/level_2/level_3/jail
+	@chattr -i level_1/level_2/algorithm.py
 	@rm level_1/level_2/bashrc/jail.bashrc
 	@rm level_1/level_2/level_3/app/modules/algorithm.py
 	@rm level_1/level_2/level_3/jail/algorithm.py
