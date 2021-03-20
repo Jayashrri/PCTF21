@@ -3,17 +3,17 @@ version: '3.3'
 services:
   level1:
     build:
-      context: ./level_1
+      context: ./
     image: pctf21_bluewhale_lvl1:latest
     container_name: bluewhale
     volumes:
-      - ./level_1/shell:/home/cobb/shell
-      - ./level_1/sshd_config:/etc/ssh/sshd_config
-      - ./level_1/jail.local:/etc/fail2ban/jail.local
-      - ./level_1/jail.bashrc:/home/prisoner/.bashrc
-      - ./level_1/startup.sh:/root/startup.sh
-      - ./level_1/level_2:/root/level_2
-      - ./level_1/jail.bashrc:/root/level_2/bashrc/jail.bashrc
+      - ./shell:/home/cobb/shell
+      - ./sshd_config:/etc/ssh/sshd_config
+      - ./jail.local:/etc/fail2ban/jail.local
+      - ./jail.bashrc:/home/prisoner/.bashrc
+      - ./startup.sh:/root/startup.sh
+      - ./level_2:/root/level_2
+      - ./jail.bashrc:/root/level_2/bashrc/jail.bashrc
     restart: always
     tty: true
     hostname: bluewhale
