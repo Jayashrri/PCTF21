@@ -3,6 +3,8 @@ services:
   level3:
     build:
       context: ./
+      args:
+        - PROC_LIMIT=2000
     image: pctf21_bluewhale_lvl3:latest
     container_name: bluewhale_lvl3
     volumes:

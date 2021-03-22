@@ -4,12 +4,14 @@ services:
   level1:
     build:
       context: ./
+      args:
+        - PROC_LIMIT=2000
     image: pctf21_bluewhale_lvl1:latest
     container_name: bluewhale
     volumes:
       - ./shell:/home/cobb/shell
-      - ./sshd_config:/etc/ssh/sshd_config
-      - ./jail.local:/etc/fail2ban/jail.local
+      - ./config/sshd_config:/etc/ssh/sshd_config
+      - ./config/jail.local:/etc/fail2ban/jail.local
       - ./jail.bashrc:/home/prisoner/.bashrc
       - ./startup.sh:/root/startup.sh
       - ./level_2:/root/level_2
