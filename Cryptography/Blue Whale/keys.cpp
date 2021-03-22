@@ -4,9 +4,10 @@
 using namespace std;
 
 vector<uint8_t> Xor(vector<uint8_t>& message, vector<uint8_t>& key) {
-    size_t n = message.size();
-    vector<uint8_t> cipher(n, 0);
-    for (size_t i=0; i<n; i++)
+    size_t m = message.size();
+    size_t n = key.size();
+    vector<uint8_t> cipher(m, 0);
+    for (size_t i=0; i<m; i++)
         cipher.at(i) = message.at(i) ^ key.at(i%n);
     return cipher;
 }
@@ -34,7 +35,7 @@ int main() {
     getline(cin, key);
 
     try {
-        string cipher("f705128fc7f1e021d8bb7af84d49caf583b8332c45185689da96f02985037ae2f9aab39867caf2e74ad16d3da66f4d0a7d819d");
+        string cipher("438f23af749a88744b504c1cef8f4ba018d263af2ed38b62123f5943b9dc12b91cca3eaf618d9a60410c0547acda4ba14cde37");
         vector<uint8_t> cipher_bytes = bytes_fromhex(cipher);
         vector<uint8_t> key_bytes = bytes_fromhex(key);
         vector<uint8_t> decrypted_bytes = Xor(cipher_bytes, key_bytes);

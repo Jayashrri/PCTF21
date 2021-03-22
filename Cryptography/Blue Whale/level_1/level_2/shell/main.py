@@ -11,7 +11,7 @@ class Shell:
     def __init__(self, config_file, guide_file):
         config = json.load(open(config_file, 'r'))
         self.username = config['username']
-        self.key = config['xor_key']
+        self.keywords = config['keywords']
         print(cs(open(guide_file, 'r').read(), "#41fdfe").bold())
 
     def exec_shell(self) -> int:
@@ -30,10 +30,7 @@ class Shell:
             action = input(prompt)
             try:
                 if action == 'play':
-                    if game.play():
-                        print(f'key: {self.key}')
-                    else:
-                        print('try again')
+                    game.play(self.keywords)
 
                 elif action == 'shell':
                     exit_code = self.exec_shell()
