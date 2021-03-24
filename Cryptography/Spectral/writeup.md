@@ -67,11 +67,9 @@ Now move to the remote connection part.
 The server asks us for a ciphertext and gives us the decrypted version, but we get trolled if we try to send the actual ciphertext or parts of it.
 But it asks for IV when we send it the first 16 bytes of the ciphertext and luckily we have the IV now.
 
-Decrypting this first 16-byte block doesn't give any useful information but we can see that there is some text among other bytes.
-It means that the actual readable plaintext is in pieces throughout the ciphertext.
-For this we will have to decrypt the whole ciphertext.
+Decrypting this first 16-byte block gives us a gibberish and it looks base85 encoded as before. For this we will have to decrypt the whole ciphertext.
 
-We will take help of a property of AES/CBC decryption -
+Use this property of AES/CBC decryption -
 
 ![AES/CBC Property](./images/cbc-property.png)
 
@@ -111,7 +109,7 @@ pt = b''
 for i in range(len(ct)//N):
     mod_ct = list(ct)
     if i == 0:
-        pt += decrypt(ct[i*N: (i+1)*N])
+        pt += decrypt(ct[:N])
     else:
         mod_ct[(i-1)*N: i*N] = list(xor(x_key, ct[(i-1)*N: i*N]))
         mod_ct = bytes(mod_ct)
@@ -125,5 +123,6 @@ except:
     pass
 pt = pt[1:].decode()
 print(pt)
-#pctf{cut_743_BS_@nd_g1mm3_743_f1@g}
 ```
+
+Flag: `p_ctf{cut_743_BS_@nd_g1mm3_743_f1@g}`

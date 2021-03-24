@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ./Docker
+    image: pctf21_lovemeornot:latest
+    restart: always
+    volumes:
+      - ./app:/root/app
+    ports:
+      - "3000:3000"
+
+networks:
+  default:
+    name: pctf21_lovemeornot
+    driver: bridge

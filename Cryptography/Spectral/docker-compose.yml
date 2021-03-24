@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ./Docker
+    image: pctf21_spectral:latest
+    restart: always
+    volumes:
+      - ./app:/root/app
+    ports:
+      - "3001:3000"
+
+networks:
+  default:
+    name: pctf21_spectral
+    driver: bridge

@@ -82,4 +82,4 @@ print(passwd)
 #6fb3ba0e28cc55b6efa0bfc3ee10f4654c898542358545feffa1a1c3ea10a67b4c899a4a6cc258e0f3efbf93bd01ee69039a9a4f2b8545fef7bbea86fc06ff33
 ```
 
-The flag is "pctf{#311b0y_#311m@n_w#@75_753_d!ff3r3nc3_?}".
+Flag: `p_ctf{#311b0y_#311m@n_w#@75_753_d!ff3r3nc3_?}`

@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+  db:
+    build:
+      context: ./db
+      args:
+        - DB_NAME
+        - DB_ROOT_PASSWORD
+    image: pctf21_schrodinger_db:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: root
+      MYSQL_PASSWORD: "${DB_ROOT_PASSWORD}"
+  
+  app:
+    build:
+      context: ./app
+      args:
+        - FLAG
+        - IMAGE_URL
+        - USER_PASSWORD
+        - DB_NAME
+        - DB_ROOT_PASSWORD
+        - DB_ICECREAM_TABLE
+    image: pctf21_schrodinger_app:latest
+    volumes:
+      - ./logs/app.log:/root/app/app.log
+    depends_on:
+      - db
+    restart: always
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    ports:
+      - "4000:80"
+  
+  ssh:
+    build:
+      context: ./ssh
+      args:
+        - SSH_TIMEZONE
+        - SSH_USERNAME
+        - SSH_ROOT_PASSWORD
+        - SSH_USER_PASSWORD
+        - DB_NAME
+        - DB_ROOT_PASSWORD
+        - DB_ID_TABLE
+        - DB_ICECREAM_TABLE
+        - ADMIN_USERNAME
+        - ADMIN_EMAIL
+        - ADMIN_PASSWORD
+    image: pctf21_schrodinger_ssh:latest
+    volumes:
+      - ./logs/ssh.log:/home/${SSH_USERNAME}/shell/shell.log
+    depends_on:
+      - db
+      - app
+    restart: always
+    tty: true
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "4001:22"
+
+networks:
+  default:
+    name: pctf21_schrodinger
+    driver: bridge
