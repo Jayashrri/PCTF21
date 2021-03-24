@@ -37,7 +37,10 @@ ls() {
 }
 
 cat() {
-    if [[ "$@" == *"/"* ]] || [[ "$@" == *".."* ]]; then
+    if [[ $# -eq 1 ]] && [[ "$@" == *"keys" ]]; then
+        showonscreen "rbash: cat: messy output" 1>&2
+        return 1
+    elif [[ "$@" == *"/"* ]] || [[ "$@" == *".."* ]]; then
         showonscreen "rbash: cat: restricted" 1>&2
         return 1
     else

@@ -2,6 +2,8 @@
 
 pip3 install -r /root/app/requirements.txt
 
+g++ -std=c++11 /root/keys/keys.cpp -o /home/cobb/jail/keys
+
 ln -s /home/cobb/jail/keys /home/cobb/commands
 
 chown -R cobb: /home/cobb

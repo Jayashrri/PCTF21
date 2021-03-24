@@ -1,6 +1,7 @@
 {
     "host": "0.0.0.0",
     "port": "3000",
+    "keys_port": "3000",
     "flag": "p_ctf{f135t3l_l4ug#51ng_1n51d3_d0ck3r_1n51d3_d0ck3r}",
     "key": "4a90acc55c4b"
 }

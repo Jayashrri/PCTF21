@@ -5,7 +5,7 @@ services:
     build:
       context: ./
       args:
-        - PROC_LIMIT=2000
+        - PROC_LIMIT=1000
     image: pctf21_bluewhale_lvl1:latest
     container_name: bluewhale
     volumes:

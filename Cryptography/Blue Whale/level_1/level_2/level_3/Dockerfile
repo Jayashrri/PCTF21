@@ -12,7 +12,7 @@ RUN apt -y remove --purge python3.4 && \
 #    then apt-key adv --keyserver hkp://pool.sks-keyservers.net:80 \
 #    --recv-keys "$key"; keys+=("$key"); fi; done && \
     apt-get update && \
-    apt-get -y --no-install-recommends install python3.7 python3-pip build-essential file && \
+    apt-get -y --no-install-recommends install python3.7 python3-pip iproute2 build-essential file && \
     apt-get -y autoremove && \
     useradd -m ${JAIL_USERNAME} && \
     echo "root:${ROOT_PASSWORD}" | chpasswd && \
@@ -23,7 +23,7 @@ RUN apt -y remove --purge python3.4 && \
 
 WORKDIR /home/${JAIL_USERNAME}
 
-RUN mkdir commands && \
+RUN mkdir commands jail && \
     ln -s $(which clear) commands && \
     ln -s $(which rbash) commands && \
     ln -s $(which ls) commands/uncoversecrets && \

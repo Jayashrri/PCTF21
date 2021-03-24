@@ -2,7 +2,7 @@
 from os.path import dirname, realpath, join
 from stringcolor import cs
 from os import system
-from modules import game
+from hashlib import md5
 import json
 import sys
 
@@ -17,6 +17,9 @@ class Shell:
     def exec_shell(self) -> int:
         return system(f'sudo su - {self.username}')
 
+    def play(self, keywords: list) -> list:
+        return [md5(k.encode()).digest().hex() for k in keywords]
+
     def prompter(self):
         prompt = cs('\naction', "#66ff00").bold()
         prompt += cs(': ', "#ffffff").bold()
@@ -30,7 +33,9 @@ class Shell:
             action = input(prompt)
             try:
                 if action == 'play':
-                    game.play(self.keywords)
+                    print("Here, have some toys:")
+                    for toy in self.play(self.keywords):
+                        print(toy)
 
                 elif action == 'shell':
                     exit_code = self.exec_shell()
