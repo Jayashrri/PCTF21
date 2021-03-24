@@ -3,7 +3,7 @@ FROM domofactor/dind-jessie:latest AS base
 ARG JAIL_USERNAME=cobb
 ARG ROOT_PASSWORD=windows-wallpaper
 ARG JAIL_USER_PASSWORD=let-me-out
-ARG PROC_LIMIT=2000
+ARG PROC_LIMIT=1000
 
 RUN apt -y remove --purge python3.4 && \
     echo "deb http://ftp.debian.org/debian/ buster main contrib non-free" >> /etc/apt/sources.list && \
@@ -18,8 +18,7 @@ RUN apt -y remove --purge python3.4 && \
     echo "root:${ROOT_PASSWORD}" | chpasswd && \
     echo "${JAIL_USERNAME}:${JAIL_USER_PASSWORD}" | chpasswd && \
     printf "\nif [ -f \"\$HOME/.bashrc\" ]; then\n\t. \"\$HOME/.bashrc\"\nfi\n" > /home/${JAIL_USERNAME}/.profile && \
-    printf "cobb\t\t hard\t\tnproc\t ${PROC_LIMIT}\n" >> /etc/security/limits.conf && \
-    printf "@cobb\t\t hard\t\tnproc\t ${PROC_LIMIT}\n" >> /etc/security/limits.conf
+    printf "*\t\t hard\t nproc\t\t ${PROC_LIMIT}\n" >> /etc/security/limits.conf
 
 WORKDIR /home/${JAIL_USERNAME}
 
