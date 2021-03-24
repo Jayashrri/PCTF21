@@ -1,0 +1,3 @@
+# Not Rock You
+
+You love to post on the Postbook site but other users keep reporting your posts. The admin is lazy and doesn't check reports frequently. Now you have decided to take matters in your own hands. Find the password of admin user. He doesn't use simple passwords in any dictionaries so you need to find a way to get his password and cancel all reports on your posts(He doesn't like rock music). The server code was leaked somewhere and you can use it for planning your attack. The technician who set up the server must have used really weak passwords considering the leak. The flag is of the format `P_CTF{ADMIN PASSWORD}` where `ADMIN PASSWORD` is password of admin user.

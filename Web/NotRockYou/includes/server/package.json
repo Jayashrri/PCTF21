@@ -1,0 +1,23 @@
+{
+	"name": "notrockyou",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon app.js",
+		"prod": "NODE_ENV=production node app.js",
+		"seed": "node seed.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"cookie-parser": "^1.4.5",
+		"ejs": "^3.1.6",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.12.1",
+		"path": "^0.12.7"
+	}
+}

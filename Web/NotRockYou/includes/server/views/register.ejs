@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+			crossorigin="anonymous"
+		/>
+
+		<title>PostBook</title>
+	</head>
+	<body>
+		<div class="container text-center justify-content-center">
+			<div class="row">
+				<div class="col">
+					<h3>Register</h3>
+				</div>
+			</div>
+			<% if (typeof existingUser !== 'undefined'){ %>
+			<div class="row">
+				<div class="col-6">
+					<p>User already exists</p>
+				</div>
+			</div>
+			<% } %>
+			<br />
+			<% if (typeof registered !== 'undefined'){ %>
+			<div class="row">
+				<div class="col-6">
+					<p>Registration successfull you can login</p>
+				</div>
+			</div>
+			<% } %>
+			<div class="row">
+				<form action="/register" method="post">
+					<div class="row justify-content-center my-1">
+						<div class="col-3">
+							<label for="name">Username : </label>
+						</div>
+						<div class="col-3">
+							<input type="text" name="name" id="name" />
+						</div>
+					</div>
+					<div class="row justify-content-center my-1">
+						<div class="col-3">
+							<label for="password">Password : </label>
+						</div>
+						<div class="col-3">
+							<input
+								type="password"
+								name="password"
+								id="password"
+							/>
+						</div>
+					</div>
+					<div class="row justify-content-center my-3">
+						<input
+							class="btn btn-sm btn-success col-2"
+							type="submit"
+							value="Register"
+						/>
+					</div>
+					<div class="row">
+						<div class="col">
+							<p class="text-danger" id="msg"></p>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+					<a href="/">Login here</a>
+				</div>
+			</div>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			let validator = document.getElementById("password");
+			let msg = document.getElementById("msg");
+			validator.addEventListener("keyup", (e) => {
+				let password = validator.value;
+				let pattern = /^[A-Za-z0-9]*$/;
+				if (!password.match(pattern)) {
+					msg.innerText =
+						"Password must contain only alphanumeric characters.";
+				} else {
+					msg.innerText = "";
+				}
+			});
+		</script>
+	</body>
+</html>
