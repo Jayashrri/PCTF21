@@ -1,0 +1,16 @@
+After I returned to my hostel from my trip home, I found out that my roommate has been snooping into my PC!
+Can you find out what all has he done?
+Here is a disk image file I've captured right after he turned off the PC for you to analyse and answer some of the questions that I have on my mind.
+Answer them and you'll be rewarded with a flag:
+
+1. When did he last bootup my PC? Answer in HH:MM:SS
+2. How did he access my PC? Did he guess my password? If it's that easy, can you too find it out?
+3. I suspect he installed some application and then removed it. When did he install this application? Answer in HH:MM
+4. How much of my precious network data did it consume? Answer in MiB, rounded off to the nearest integer.
+5. I'm pretty sure he plugged in a USB drive. When did he last remove it? Answer in HH:MM:SS
+
+Oh, and all the times must be reported in my time zone.
+
+Flag format:
+Concatenate the answer to these questions in order with an underscore between each one, enclosed within p_ctf{}
+Example: p_ctf{01:23:45_easypassword_12:34_420_11:22:33}

@@ -1,0 +1,9 @@
+It's been a while now since I've been trying to locate my childhood best friend, who's now a CS undergrad.
+He seemed to be off the radar, until a few days back when I got his e-mail address: jakegodfreyb4c43717@gmail.com.
+When I e-mailed this address, I got an instant reply saying he's busy working on a project right now.
+Right now, this is the only information I have of him but I would really like to meet him in person.
+Can you find out where he lives?
+
+Flag format: Give location co-ordinates rounded off to three places after decimal point enclosed by p_ctf{}. Eg. p_ctf{12.345,-67.890}
+
+Hint: You can get a wiggle on if you leave no stone unturned.
