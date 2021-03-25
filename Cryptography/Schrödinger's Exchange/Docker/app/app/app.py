@@ -39,6 +39,7 @@ def main():
         app.config['flag'] = data['app']['flag']
         app.config['image_url'] = data['app']['image_url']
         app.config['ssh_password'] = data['app']['ssh_password']
+        app.config['ssh_port'] = data['app']['ssh_port']
         app.config['logger'] = logger
 
         host = data['app']['host']

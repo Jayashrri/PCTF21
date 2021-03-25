@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 services:
   db:
     build:
@@ -11,16 +11,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${DB_NAME}"
-      MYSQL_USER: root
-      MYSQL_PASSWORD: "${DB_ROOT_PASSWORD}"
-  
+
   app:
     build:
       context: ./app
       args:
         - FLAG
         - IMAGE_URL
-        - USER_PASSWORD
+        - SSH_USER_PASSWORD
+        - SSH_PORT
         - DB_NAME
         - DB_ROOT_PASSWORD
         - DB_ICECREAM_TABLE

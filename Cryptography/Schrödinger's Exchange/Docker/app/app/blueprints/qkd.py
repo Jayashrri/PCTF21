@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from base64 import b64encode
-from random import sample
 from os import urandom
 import codecs
 
@@ -25,9 +24,6 @@ def verify_params(params, logger) -> bool:
     except Exception as e:
         logger.exception(str(e))
         return False
-
-def make_icecream() -> str:
-    return ''.join(sample(urandom(64), 64))
 
 key_distribution_blueprint = Blueprint('key_distribution', __name__)
 key_distribution_blueprint.config = {}
@@ -84,13 +80,14 @@ def distribute():
                 if is_local:
 
                     db = key_distribution_blueprint.config['db']
-                    icecream = make_icecream()
+                    icecream = urandom(32).hex()
                     while not db.save(icecream, e_basis):
-                        icecream = make_icecream()
+                        icecream = urandom(32).hex()
 
                     ssh_password = key_distribution_blueprint.config['ssh_password']
+                    ssh_port = key_distribution_blueprint.config['ssh_port']
                     response.headers["Eavesdropper-Bounced-But-Dropped-His-Icecream"] = icecream
-                    response.headers["Eavesdropper-Bounced-But-Dropped-His-Keys"] = ssh_password
+                    response.headers[f"Eavesdropper-Bounced-But-Dropped-His-Keys-For-Port-{ssh_port}"] = ssh_password
 
                 else:
                     response.headers["You-Saw-Nothing"] = "only localhost is the all-seer"

@@ -36,8 +36,3 @@ class Actions:
         self.cursor.execute(cmd)
         self.db.commit()
         return True
-
-    def __del__(self) -> None:
-        self.db.commit()
-        self.cursor.close()
-        self.db.close()
