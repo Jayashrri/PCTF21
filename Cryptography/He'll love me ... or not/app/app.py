@@ -99,7 +99,7 @@ class Challenge:
 		for bit in sequence:
 			factor, correct = (randrange(2, 10), 'n') if bit == '1' else (1, 'y')
 			prime = factor*self.random_prime(38)
-			response = input(f"\n{prime} :  ")
+			response = input(f"{prime}: ")
 			if not response.lower() == correct:
 				break
 			count += 1
@@ -107,14 +107,14 @@ class Challenge:
 
 	def welcome(self):
 		print("*"*50)
-		print("Sorry we forgot to tell you curve parameters:(")
+		print("Sorry we forgot to tell you curve parameters :(")
 		print("Well, now is an opportunity.")
 		print("Just answer the following questions and you shall get what you seek.")
 		print("Are the given numbers prime? (y/n)")
 		print("*"*50)
 
 	def endgame(self):
-		print("\nLOL did you seriously think we would give up the flag that easy?")
+		print("LOL did you seriously think we would give up the flag that easy?")
 		print(f"Hurry up {self.url}")
 
 	def run(self):
@@ -122,11 +122,11 @@ class Challenge:
 		sequence = ''.join('{:08b}'.format(ord(ch)) for ch in f'Here you go, a = {self.curve.a}')
 		try:
 			assert self.ask_questions(sequence)
-			answer = int(input(f'\nSECRET KEY (hex): '), 16)
+			answer = int(input(f'SECRET KEY (hex): '), 16)
 			assert self.P.xy() == self.G.multiply(answer).xy()
 			self.endgame()
 		except:
-			print("\nOOPS! Keep trying ...\n")
+			print("OOPS! Keep trying ...")
 
 def handler(sig, frame):
 	sys.exit(0)

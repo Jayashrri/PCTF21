@@ -1,0 +1,4 @@
+Your prize awaits inside the ocean's depths!
+
+ssh cobb@<host> -p <port>
+Password: <password>
