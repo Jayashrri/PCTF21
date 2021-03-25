@@ -8,4 +8,8 @@ Here is an example for the first one
 
 ![first line image](includes/one.png)
 
+This can also be done with a python script like [this](includes/decode.py), that reads the lines, and provides you with images of every string, which can then be read.
+
+![decoded images](includes/board.png)
+
 Hence, each of these are decoded and then the final flag is reached.
