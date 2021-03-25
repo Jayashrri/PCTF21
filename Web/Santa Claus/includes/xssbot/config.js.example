@@ -1,0 +1,7 @@
+module.exports = {
+	adminEmail: "",
+	adminPassword: "",
+	mongoString: "",
+	baseURL: "SERVER URL",
+	jwtSecret: "SECRET",
+};

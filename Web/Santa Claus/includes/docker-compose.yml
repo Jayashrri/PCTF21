@@ -1,23 +1,28 @@
 version: "3"
 
 services:
-    nodeapp:
-        container_name: nodeapp
+    santanode:
+        container_name: santanode
         build: ./nodeapp
         restart: always
         ports:
             - "8000:8000"
         depends_on:
-            - mongocontainer
+            - santamongo
 
-    mongocontainer:
-        container_name: mongocontainer
-        build: ./mongocontainer
+    santamongo:
+        container_name: santamongo
+        image: mongo:latest
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: example
+        env_file:
+            - .env
         ports:
             - "27018:27017"
         volumes:
             - ./mongocontainer/mongodata:/data/db
+    santabot:
+        container_name: santabot
+        build: ./xssbot
+        restart: always
+        depends_on:
+            - santamongo

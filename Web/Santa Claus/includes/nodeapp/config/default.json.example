@@ -1,0 +1,12 @@
+{
+	"PORT": PORT,
+	"mongoString": "",
+	"bcrypt": {
+		"saltRounds":SALTROUNDS
+	},
+	"jwtSecret": "SECRET",
+	"cookieExpTime": EXPTIME,
+	"adminEmail": "ADMINEMAIL",
+	"adminPassword": "ADMINPASS",
+	"flag": "P_CTF{REDACTED}"
+}

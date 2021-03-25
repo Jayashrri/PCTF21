@@ -8,4 +8,5 @@ RUN npm i
 
 COPY . .
 
-CMD [ "bash", "prodserver.sh" ]
+
+CMD [ "npm", "run", "prod" ]

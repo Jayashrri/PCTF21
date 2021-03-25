@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const session = require("express-session");
 const cookieparser = require("cookie-parser");
 const mongoose = require("mongoose");
 const config = require("config");
@@ -9,6 +8,7 @@ const authMiddleware = require("./middlewares/authMiddleware");
 const app = new express();
 
 const PORT = config.get("PORT") || 8000;
+
 //Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,20 +20,11 @@ app.set("view engine", "ejs");
 //Public
 app.use(express.static(path.join(__dirname, "public")));
 
-//Session
-app.use(
-	session({
-		secret: config.get("sessionSecret"),
-		resave: false,
-		saveUninitialized: true,
-		cookie: { httpOnly: false, secure: false, maxAge: 600000 },
-	})
-);
-
 //Cookie Parser
-app.use(cookieparser(config.get("sessionSecret")));
+app.use(cookieparser());
 
 //mongoose
+
 mongoose
 	.connect(config.get("mongoString"), {
 		useNewUrlParser: true,
@@ -48,7 +39,8 @@ app.use(authMiddleware);
 
 //Index Page
 app.get(["/", "/index"], (req, res) => {
-	if (req.email === config.get("adminEmail")) res.render("admin");
+	if (req.email === config.get("adminEmail"))
+		res.render("admin", { flag: config.get("flag") });
 	else if (req.email) res.redirect("/jobs");
 	else res.render("index");
 });
