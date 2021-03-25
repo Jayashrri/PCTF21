@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+    image: "${WEB_IMAGE_NAME}:${WEB_IMAGE_TAG}"
+    container_name: "${WEB_CONTAINER_NAME}"
+    ports:
+      - "${WEB_HOST_PORT}:${WEB_CONTAINER_PORT}"
