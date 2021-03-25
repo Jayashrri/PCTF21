@@ -1,0 +1,3 @@
+Actions:
+    play:   to play game
+    shell:  to get shell

@@ -1,0 +1,3 @@
+Actions:
+    flag:   to get flag
+    shell:  to get shell

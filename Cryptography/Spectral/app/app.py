@@ -37,7 +37,7 @@ class Challenge:
 
     def interact(self):
         while True:
-            cipher = input("\nCIPHERTEXT (HEX): ").strip()
+            cipher = input("CIPHERTEXT (HEX): ").strip()
             if len(cipher) == 0:
                 print("Hit the mute button again.")
                 continue
@@ -50,7 +50,7 @@ class Challenge:
                 print("Bruh .... use HEX !!!")
                 continue
             if cipher == self.ct[:self.N]:
-                response = input("\nIV (HEX): ").strip()
+                response = input("IV (HEX): ").strip()
                 if len(response) == 0:
                     print("Hit the mute button again.")
                     continue
@@ -62,7 +62,7 @@ class Challenge:
                 if response == self.iv:
                     print(f"DECRYPTED: {self.flag[:self.N].hex()}")
                 else:
-                    print("Incorrect:/")
+                    print("Incorrect :/")
             elif not self.ct.find(cipher) == -1:
                 self.troll_player()
             else:
