@@ -6,10 +6,10 @@ So, now we know that the encoding is related to chess. On searching for the vari
 
 Here is an example for the first one
 
-![first line image](includes/one.png)
+![first line image](SolnStuff/one.png)
 
-This can also be done with a python script like [this](includes/decode.py), which reads the lines, and provides you with images of every string, which can then be read.
+This can also be done with a python script like [this](SolnStuff/decode.py), which reads the lines, and provides you with images of every string, which can then be read.
 
-![decoded images](includes/board.png)
+![decoded images](SolnStuff/board.png)
 
 Hence, each of these is decoded, and then the final flag is found.
