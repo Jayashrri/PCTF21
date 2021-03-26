@@ -1,16 +1,16 @@
 version: '3.3'
 services:
-  db:
-    build:
-      context: ./db
-      args:
-        - DB_NAME
-        - DB_ROOT_PASSWORD
-    image: pctf21_schrodinger_db:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "${DB_NAME}"
+#  db:
+#    build:
+#      context: ./db
+#      args:
+#        - DB_NAME
+#        - DB_ROOT_PASSWORD
+#    image: pctf21_schrodinger_db:latest
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+#      MYSQL_DATABASE: "${DB_NAME}"
 
   app:
     build:
@@ -28,8 +28,8 @@ services:
     image: pctf21_schrodinger_app:latest
     volumes:
       - ./logs/app.log:/root/app/app.log
-    depends_on:
-      - db
+#    depends_on:
+#      - db
     restart: always
     environment:
       DEBIAN_FRONTEND: noninteractive
@@ -57,10 +57,11 @@ services:
     volumes:
       - ./logs/ssh.log:/home/${SSH_USERNAME}/shell/shell.log
     depends_on:
-      - db
+#      - db
       - app
     restart: always
     tty: true
+    privileged: true
     environment:
       DEBIAN_FRONTEND: noninteractive
     cap_add:
