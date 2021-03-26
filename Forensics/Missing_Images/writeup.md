@@ -8,8 +8,8 @@
 
   We can then copy the data chunks starting from the line with P to the end of the chunk to seperate files. We can then open this in a photo editor, like gimp or photoshop, or other netpbm compatible programs, to read the info hidden in them, like these.
 
-![first photo](includes/1.png)
+![first photo](Pictures/1.png)
 
-![second photo](includes/2.png)
+![second photo](Pictures/2.png)
 
-![third photo](includes/3.png)
+![third photo](Pictures/3.png)
