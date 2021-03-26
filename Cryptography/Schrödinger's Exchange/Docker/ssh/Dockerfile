@@ -4,6 +4,8 @@ ARG SSH_TIMEZONE
 ARG SSH_USERNAME
 ARG SSH_ROOT_PASSWORD
 ARG SSH_USER_PASSWORD
+ARG DB_HOST
+ARG DB_PORT
 ARG DB_NAME
 ARG DB_ROOT_PASSWORD
 ARG DB_ID_TABLE
@@ -37,6 +39,8 @@ COPY shell ./shell
 WORKDIR /home/$SSH_USERNAME/shell
 
 RUN pip3 install -r requirements.txt && \
+    jq ".db.host = \"$DB_HOST\"" config.json | sponge config.json && \
+    jq ".db.port = \"$DB_PORT\"" config.json | sponge config.json && \
     jq ".db.database = \"$DB_NAME\"" config.json | sponge config.json && \
     jq ".db.password = \"$DB_ROOT_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.id_table = \"$DB_ID_TABLE\"" config.json | sponge config.json && \

@@ -20,6 +20,8 @@ services:
         - IMAGE_URL
         - SSH_USER_PASSWORD
         - SSH_PORT
+        - DB_HOST
+        - DB_PORT
         - DB_NAME
         - DB_ROOT_PASSWORD
         - DB_ICECREAM_TABLE
@@ -32,7 +34,7 @@ services:
     environment:
       DEBIAN_FRONTEND: noninteractive
     ports:
-      - "4000:80"
+      - "${APP_PORT}:80"
   
   ssh:
     build:
@@ -42,6 +44,8 @@ services:
         - SSH_USERNAME
         - SSH_ROOT_PASSWORD
         - SSH_USER_PASSWORD
+        - DB_HOST
+        - DB_PORT
         - DB_NAME
         - DB_ROOT_PASSWORD
         - DB_ID_TABLE
@@ -62,7 +66,7 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - "4001:22"
+      - "${SSH_PORT}:22"
 
 networks:
   default:
