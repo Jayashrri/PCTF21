@@ -5,7 +5,7 @@ from base64 import b64encode
 from os import urandom
 import codecs
 
-def verify_params(params, logger) -> bool:
+def verify_params(params) -> bool:
     valid_len = 1024
     num_keys = 2
     valid_photons = [[1, 0], [0, 1], [0.707, -0.707], [0.707, 0.707]]
@@ -22,7 +22,6 @@ def verify_params(params, logger) -> bool:
             assert params['basis'][i] in valid_base
         return True
     except Exception as e:
-        logger.exception(str(e))
         return False
 
 key_distribution_blueprint = Blueprint('key_distribution', __name__)
@@ -34,13 +33,11 @@ def record_params(setup_state):
 
 @key_distribution_blueprint.route('/flag', methods=['GET'])
 def distribute():
-    logger = key_distribution_blueprint.config['logger']
-
     try:
         if request.method == 'GET':
 
             params = request.get_json()
-            if not verify_params(params, logger):
+            if not verify_params(params):
                 return 'invalid parameters', 422
 
             for k in params.keys():
@@ -95,5 +92,4 @@ def distribute():
         else:
             return 'method not implemented', 501
     except Exception as e:
-        logger.exception(str(e))
         return 'an unexpected error occurred', 500

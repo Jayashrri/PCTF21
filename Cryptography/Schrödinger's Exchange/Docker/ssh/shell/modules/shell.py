@@ -54,11 +54,10 @@ class Verification:
 
 class Shell(Verification):
 
-    def __init__(self, config_file, guide_file, logger):
+    def __init__(self, config_file, guide_file):
         config_data = load(open(config_file, 'r'))
-        self.logger = logger
         try:
-            self.actions = Actions(config_data, logger)
+            self.actions = Actions(config_data)
             signal(SIGINT, self.actions.close)
             print(cs(open(guide_file, 'r').read(), "#41fdfe").bold())
 
@@ -109,12 +108,10 @@ class Shell(Verification):
                         print(self.actions.signout())
 
                 except Exception as e:
-                    self.logger.exception(str(e))
                     print(cs(str(e), "#ff0000").bold())
 
             self.actions.delete_table()
             print(cs("BYE!", "#66ff00").bold())
 
         except Exception as e:
-            self.logger.exception(str(e))
             print(cs(str(e), "#ff0000").bold())

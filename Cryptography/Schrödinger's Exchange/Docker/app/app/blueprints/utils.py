@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from base64 import b64encode
 
-def verify_photons(photons, logger) -> bool:
+def verify_photons(photons) -> bool:
     valid_len = 1024
     valid_photons = [[1, 0], [0, 1], [0.707, -0.707], [0.707, 0.707]]
     
@@ -12,10 +12,9 @@ def verify_photons(photons, logger) -> bool:
             assert photons[i] in valid_photons
         return True
     except Exception as e:
-        logger.exception(str(e))
         return False
 
-def verify_basis(basis, logger) -> bool:
+def verify_basis(basis) -> bool:
     valid_len = 1024
     valid_base = ['+', 'x']
 
@@ -26,10 +25,9 @@ def verify_basis(basis, logger) -> bool:
             assert basis[i] in valid_base
         return True
     except Exception as e:
-        logger.exception(str(e))
         return False
 
-def verify_bits(bits, logger) -> bool:
+def verify_bits(bits) -> bool:
     valid_len = 1024
     valid_bits = ['0', '1', '\x00']
 
@@ -40,7 +38,6 @@ def verify_bits(bits, logger) -> bool:
             assert bits[i] in valid_bits
         return True
     except Exception as e:
-        logger.exception(str(e))
         return False
 
 utils_blueprint = Blueprint('utils', __name__)
@@ -52,8 +49,6 @@ def record_params(setup_state):
 
 @utils_blueprint.route('/polarize', methods=['GET'])
 def polarize():
-    logger = utils_blueprint.config['logger']
-
     try:
         if request.method == 'GET':
 
@@ -62,12 +57,11 @@ def polarize():
                 bits = params['bits']
                 basis = params['basis']
             except Exception as e:
-                logger.exception(str(e))
                 return 'invalid parameters', 422
 
-            if not verify_bits(bits, logger):
+            if not verify_bits(bits):
                 return 'invalid parameters', 422
-            if not verify_basis(basis, logger):
+            if not verify_basis(basis):
                 return 'invalid parameters', 422
 
             BB84 = utils_blueprint.config['BB84']
@@ -87,14 +81,11 @@ def polarize():
         else:
             return 'method not implemented', 501
     except Exception as e:
-        logger.exception(str(e))
         return 'an unexpected error occurred', 500
 
 
 @utils_blueprint.route('/measure', methods=['GET'])
 def measure():
-    logger = utils_blueprint.config['logger']
-
     try:
         if request.method == 'GET':
 
@@ -103,12 +94,11 @@ def measure():
                 photons = params['photons']
                 basis = params['basis']
             except Exception as e:
-                logger.exception(str(e))
                 return 'invalid parameters', 422
 
-            if not verify_photons(photons, logger):
+            if not verify_photons(photons):
                 return 'invalid parameters', 422
-            if not verify_basis(basis, logger):
+            if not verify_basis(basis):
                 return 'invalid parameters', 422
 
             photons = [complex(real, imag) for real, imag in photons]
@@ -121,13 +111,10 @@ def measure():
         else:
             return 'method not implemented', 501
     except Exception as e:
-        logger.exception(str(e))
         return 'an unexpected error occurred', 500
 
 @utils_blueprint.route('/sharedkey', methods=['GET'])
 def shared_key():
-    logger = utils_blueprint.config['logger']
-
     try:
         if request.method == 'GET':
 
@@ -137,14 +124,13 @@ def shared_key():
                 basis_1 = params['basis_1']
                 basis_2 = params['basis_2']
             except Exception as e:
-                logger.exception(str(e))
                 return 'invalid parameters', 422
 
-            if not verify_bits(bits, logger):
+            if not verify_bits(bits):
                 return 'invalid parameters', 422
-            if not verify_basis(basis_1, logger):
+            if not verify_basis(basis_1):
                 return 'invalid parameters', 422
-            if not verify_basis(basis_2, logger):
+            if not verify_basis(basis_2):
                 return 'invalid parameters', 422
 
             BB84 = utils_blueprint.config['BB84']
@@ -157,5 +143,4 @@ def shared_key():
         else:
             return 'method not implemented', 501
     except Exception as e:
-        logger.exception(str(e))
         return 'an unexpected error occurred', 500
