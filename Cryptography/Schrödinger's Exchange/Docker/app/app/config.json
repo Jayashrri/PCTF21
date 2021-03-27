@@ -6,6 +6,7 @@
         "image_url": "",
         "ssh_host": "",
         "ssh_port": "",
+        "ssh_username": "",
         "ssh_password": ""
     },
     "db": {

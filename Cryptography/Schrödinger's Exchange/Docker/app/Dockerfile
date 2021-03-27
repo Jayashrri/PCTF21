@@ -4,6 +4,7 @@ ARG FLAG
 ARG IMAGE_URL
 ARG SSH_HOST
 ARG SSH_PORT
+ARG SSH_USERNAME
 ARG SSH_USER_PASSWORD
 ARG DB_HOST
 ARG DB_PORT
@@ -24,6 +25,7 @@ RUN apt-get update && \
     jq ".app.image_url = \"$IMAGE_URL\"" config.json | sponge config.json && \
     jq ".app.ssh_port = \"$SSH_HOST\"" config.json | sponge config.json && \
     jq ".app.ssh_port = \"$SSH_PORT\"" config.json | sponge config.json && \
+    jq ".app.username = \"$SSH_USERNAME\"" config.json | sponge config.json && \
     jq ".app.ssh_password = \"$SSH_USER_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.host = \"$DB_HOST\"" config.json | sponge config.json && \
     jq ".db.port = \"$DB_PORT\"" config.json | sponge config.json && \

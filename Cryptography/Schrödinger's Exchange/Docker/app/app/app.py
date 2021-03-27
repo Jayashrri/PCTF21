@@ -24,6 +24,7 @@ def main():
         app.config['image_url'] = data['app']['image_url']
         app.config['ssh_host'] = data['app']['ssh_host']
         app.config['ssh_port'] = data['app']['ssh_port']
+        app.config['ssh_username'] = data['app']['ssh_username']
         app.config['ssh_password'] = data['app']['ssh_password']
 
         host = data['app']['host']
