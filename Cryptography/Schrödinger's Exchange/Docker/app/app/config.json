@@ -4,8 +4,9 @@
         "port": "80",
         "flag": "",
         "image_url": "",
-        "ssh_password": "",
-        "ssh_port": ""
+        "ssh_host": "",
+        "ssh_port": "",
+        "ssh_password": ""
     },
     "db": {
         "host": "",

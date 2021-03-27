@@ -22,8 +22,9 @@ def main():
         app.config['BB84'] = BB84()
         app.config['flag'] = data['app']['flag']
         app.config['image_url'] = data['app']['image_url']
-        app.config['ssh_password'] = data['app']['ssh_password']
+        app.config['ssh_host'] = data['app']['ssh_host']
         app.config['ssh_port'] = data['app']['ssh_port']
+        app.config['ssh_password'] = data['app']['ssh_password']
 
         host = data['app']['host']
         port = data['app']['port']

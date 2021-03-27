@@ -18,8 +18,9 @@ services:
       args:
         - FLAG
         - IMAGE_URL
-        - SSH_USER_PASSWORD
+        - SSH_HOST
         - SSH_PORT
+        - SSH_USER_PASSWORD
         - DB_HOST
         - DB_PORT
         - DB_NAME

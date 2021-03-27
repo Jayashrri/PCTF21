@@ -2,8 +2,9 @@ FROM python:3.9-slim-buster
 
 ARG FLAG
 ARG IMAGE_URL
-ARG SSH_USER_PASSWORD
+ARG SSH_HOST
 ARG SSH_PORT
+ARG SSH_USER_PASSWORD
 ARG DB_HOST
 ARG DB_PORT
 ARG DB_NAME
@@ -21,8 +22,9 @@ RUN apt-get update && \
     chmod +x app.py && \
     jq ".app.flag = \"$FLAG\"" config.json | sponge config.json && \
     jq ".app.image_url = \"$IMAGE_URL\"" config.json | sponge config.json && \
-    jq ".app.ssh_password = \"$SSH_USER_PASSWORD\"" config.json | sponge config.json && \
+    jq ".app.ssh_port = \"$SSH_HOST\"" config.json | sponge config.json && \
     jq ".app.ssh_port = \"$SSH_PORT\"" config.json | sponge config.json && \
+    jq ".app.ssh_password = \"$SSH_USER_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.host = \"$DB_HOST\"" config.json | sponge config.json && \
     jq ".db.port = \"$DB_PORT\"" config.json | sponge config.json && \
     jq ".db.database = \"$DB_NAME\"" config.json | sponge config.json && \

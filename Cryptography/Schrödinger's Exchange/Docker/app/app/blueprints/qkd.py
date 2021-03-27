@@ -81,10 +81,11 @@ def distribute():
                     while not db.save(icecream, e_basis):
                         icecream = urandom(32).hex()
 
-                    ssh_password = key_distribution_blueprint.config['ssh_password']
+                    ssh_host = key_distribution_blueprint.config['ssh_host']
                     ssh_port = key_distribution_blueprint.config['ssh_port']
+                    ssh_password = key_distribution_blueprint.config['ssh_password']
                     response.headers["Eavesdropper-Bounced-But-Dropped-His-Icecream"] = icecream
-                    response.headers[f"Eavesdropper-Bounced-But-Dropped-His-Keys-For-Port-{ssh_port}"] = ssh_password
+                    response.headers[f"Eavesdropper-Bounced-But-Dropped-His-Keys-For-{ssh_host}:{ssh_port}"] = ssh_password
 
                 else:
                     response.headers["You-Saw-Nothing"] = "only localhost is the all-seer"
