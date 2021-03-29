@@ -1,4 +1,4 @@
-FROM domofactor/dind-jessie:latest AS base
+FROM anuragnitt/dind:buster-slim AS base
 
 ARG SHELL_USERNAME=cobb
 ARG JAIL_USERNAME=prisoner
@@ -7,14 +7,8 @@ ARG SHELL_USER_PASSWORD=let-me-in
 ARG JAIL_USER_PASSWORD=let-me-out
 ARG PROC_LIMIT=1000
 
-RUN apt -y remove --purge python3.4 && \
-    echo "deb http://ftp.debian.org/debian/ buster main contrib non-free" >> /etc/apt/sources.list && \
-#    apt update 2>&1 1>/dev/null | sed -ne 's/.*NO_PUBKEY //p' | \
-#    while read key; do if ! [[ ${keys[*]} =~ "$key" ]]; \
-#    then apt-key adv --keyserver hkp://pool.sks-keyservers.net:80 \
-#    --recv-keys "$key"; keys+=("$key"); fi; done && \
-    apt-get update && \
-    apt-get -y --no-install-recommends install sudo python3.7 python3-pip && \
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install sudo python3-pip && \
     apt-get -y autoremove && \
     useradd -m ${SHELL_USERNAME} && \
     useradd -m ${JAIL_USERNAME} && \
