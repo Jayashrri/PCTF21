@@ -1,7 +1,7 @@
 FROM node:slim
 
 RUN apt update -y && apt upgrade -y
-RUN apt install wget -y
+RUN apt install wget procps -y
 
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 

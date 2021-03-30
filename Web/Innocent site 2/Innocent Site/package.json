@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async-execute": "^1.2.0",
     "body-parser": "^1.19.0",
     "catch-exit": "^1.0.3",
     "cookie-parser": "~1.4.4",
@@ -15,7 +16,6 @@
     "express-slow-down": "^1.4.0",
     "helmet": "^4.3.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "reverse-dns-lookup": "^1.0.0"
+    "morgan": "~1.9.1"
   }
 }

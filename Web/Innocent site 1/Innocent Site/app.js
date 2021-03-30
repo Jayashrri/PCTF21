@@ -16,6 +16,7 @@ app.use(helmet({
 app.use(logger('dev'));
 app.use(express.json({limit: '500'}));
 app.use(cookieParser());
+app.disable('x-powered-by');
 
 app.use('/', indexRouter);
 
