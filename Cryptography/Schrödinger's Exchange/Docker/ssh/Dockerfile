@@ -20,8 +20,8 @@ RUN ln -snf /usr/share/zoneinfo/$SSH_TIMEZONE /etc/localtime && \
     apt-get -y install --no-install-recommends openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass && \
     rm /etc/ssh/sshd_config
 
-COPY sshd_config /etc/ssh
-COPY jail.local /etc/fail2ban
+COPY config/sshd_config /etc/ssh
+COPY config/jail.local /etc/fail2ban
 COPY startup.sh /root
 
 RUN chmod +x /root/startup.sh && \
