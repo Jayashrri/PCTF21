@@ -21,10 +21,8 @@ RUN printf "\n============================================================" && \
     echo "root:${SSH_ROOT_PASSWORD}" | chpasswd && \
     echo "${SSH_USERNAME}:${SSH_USER_PASSWORD}" | chpasswd && \
     echo "${JAIL_USERNAME}:${JAIL_USER_PASSWORD}" | chpasswd && \
-    printf "\nif [ -f \"\$HOME/.bashrc\" ]; then\n\t. \"\$HOME/.bashrc\"\nfi\n" > /home/${JAIL_USERNAME}/.profile && \
     printf "${SSH_USERNAME}\tALL = NOPASSWD: /bin/su - ${JAIL_USERNAME}\n" >> /etc/sudoers && \
-    printf "${JAIL_USERNAME}\tALL = NOPASSWD: /usr/bin/docker\n" >> /etc/sudoers && \
-    printf "*\t\t hard\t nproc\t\t ${PROC_LIMIT}\n" >> /etc/security/limits.conf
+    printf "${JAIL_USERNAME}\tALL = NOPASSWD: /usr/bin/docker\n" >> /etc/sudoers
 
 WORKDIR /home/${JAIL_USERNAME}
 

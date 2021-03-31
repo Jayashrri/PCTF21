@@ -3,21 +3,17 @@ services:
   level3:
     build:
       context: ./
-      args:
-        - PROC_LIMIT=800
     image: pctf21_bluewhale_lvl3:latest
     container_name: bluewhale_lvl3
-    deploy:
-      resources:
-        limits:
-          memory: 512M
     volumes:
       - ./app:/root/app
       - ./algorithm.py:/root/app/modules/algorithm.py
       - ./keys:/root/keys
       - ./keys/config.json:/home/cobb/keys_config.json
       - ./algorithm.py:/home/cobb/jail/algorithm.py
-      - ./jail.bashrc:/home/cobb/.bashrc
+      - ./security/jail.bashrc:/home/cobb/.bashrc
+      - ./security/jail.profile:/home/cobb/.profile
+      - ./security/limits.conf:/etc/security/limits.conf
       - ./startup.sh:/root/startup.sh
     restart: always
     tty: true

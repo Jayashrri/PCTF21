@@ -1,21 +1,21 @@
-#build time: 16min
 version: '3.3'
 services:
   level1:
     build:
       context: ./
-      args:
-        - PROC_LIMIT=800
     image: pctf21_bluewhale_lvl1:latest
     container_name: bluewhale
     volumes:
       - ./shell:/home/cobb/shell
       - ./config/sshd_config:/etc/ssh/sshd_config
       - ./config/jail.local:/etc/fail2ban/jail.local
-      - ./jail.bashrc:/home/prisoner/.bashrc
+      - ./security/jail.bashrc:/home/prisoner/.bashrc
+      - ./security/jail.profile:/home/prisoner/.profile
+      - ./security/limits.conf:/etc/security/limits.conf
       - ./startup.sh:/root/startup.sh
       - ./level_2:/root/level_2
-      - ./jail.bashrc:/root/level_2/bashrc/jail.bashrc
+      - ./security/jail.bashrc:/root/level_2/security/jail.bashrc
+      - ./security/jail.profile:/root/level_2/security/.profile
     restart: always
     tty: true
     hostname: bluewhale
