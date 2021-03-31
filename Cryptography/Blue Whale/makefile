@@ -22,7 +22,10 @@ stop:
 	@-rm level_1/level_2/level_3/app/modules/algorithm.py
 	@-rm level_1/level_2/level_3/algorithm.py
 	@-rm level_1/level_2/app/modules/algorithm.py
-	@-rm level_1/level_2/bashrc/jail.bashrc
+	@-rm level_1/level_2/security/jail.bashrc
+	@-rm level_1/level_2/security/.profile
+	@chmod -x level_1/level_2/shell/main.py
+	@chmod -x level_1/shell/main.py
 	@chmod -x level_1/startup.sh
 	@chmod -x level_1/level_2/startup.sh
 	@chmod -x level_1/level_2/level_3/startup.sh
