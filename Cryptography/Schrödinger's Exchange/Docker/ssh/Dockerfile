@@ -4,6 +4,8 @@ ARG SSH_TIMEZONE
 ARG SSH_USERNAME
 ARG SSH_ROOT_PASSWORD
 ARG SSH_USER_PASSWORD
+ARG DB_HOST
+ARG DB_PORT
 ARG DB_NAME
 ARG DB_ROOT_PASSWORD
 ARG DB_ID_TABLE
@@ -18,8 +20,8 @@ RUN ln -snf /usr/share/zoneinfo/$SSH_TIMEZONE /etc/localtime && \
     apt-get -y install --no-install-recommends openssh-server python3-pip jq moreutils iptables fail2ban rsyslog sshpass && \
     rm /etc/ssh/sshd_config
 
-COPY sshd_config /etc/ssh
-COPY jail.local /etc/fail2ban
+COPY config/sshd_config /etc/ssh
+COPY config/jail.local /etc/fail2ban
 COPY startup.sh /root
 
 RUN chmod +x /root/startup.sh && \
@@ -36,8 +38,9 @@ COPY shell ./shell
 
 WORKDIR /home/$SSH_USERNAME/shell
 
-RUN pip3 install --upgrade pip && \
-    pip3 install -r requirements.txt && \
+RUN pip3 install -r requirements.txt && \
+    jq ".db.host = \"$DB_HOST\"" config.json | sponge config.json && \
+    jq ".db.port = \"$DB_PORT\"" config.json | sponge config.json && \
     jq ".db.database = \"$DB_NAME\"" config.json | sponge config.json && \
     jq ".db.password = \"$DB_ROOT_PASSWORD\"" config.json | sponge config.json && \
     jq ".db.id_table = \"$DB_ID_TABLE\"" config.json | sponge config.json && \

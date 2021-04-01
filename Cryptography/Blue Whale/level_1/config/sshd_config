@@ -11,10 +11,9 @@ PermitRootLogin no
 StrictModes yes
 
 PubkeyAuthentication yes
-#RSAAuthentication yes
 PasswordAuthentication yes
 PermitEmptyPasswords no
-#UsePAM yes
+UsePrivilegeSeparation no
 
 X11Forwarding no
 PrintMotd no

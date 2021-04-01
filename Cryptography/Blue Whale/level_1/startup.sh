@@ -48,7 +48,7 @@ service ssh start
 
 service rsyslog start
 
-sshpass -p 'abcd' ssh -o StrictHostKeyChecking=no cobb@localhost
+sshpass -p 'abcd' ssh -o StrictHostKeyChecking=no cobb@localhost 1>/dev/null 2>&1
 
 service fail2ban start
 

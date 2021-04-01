@@ -3,16 +3,17 @@ services:
   level2:
     build:
       context: ./
-      args:
-        - PROC_LIMIT=800
     image: pctf21_bluewhale_lvl2:latest
     container_name: bluewhale_lvl2
     volumes:
       - ./app:/root/app
       - ./algorithm.py:/root/app/modules/algorithm.py
       - ./shell:/home/cobb/shell
-      - ./bashrc/shell.bashrc:/home/cobb/.bashrc
-      - ./bashrc/jail.bashrc:/home/prisoner/.bashrc
+      - ./security/shell.bashrc:/home/cobb/.bashrc
+      - ./security/jail.bashrc:/home/prisoner/.bashrc
+      - ./security/.profile:/home/cobb/.profile
+      - ./security/.profile:/home/prisoner/.profile
+      - ./security/limits.conf:/etc/security/limits.conf
       - ./startup.sh:/root/startup.sh
       - ./level_3:/root/level_3
       - ./algorithm.py:/root/level_3/algorithm.py

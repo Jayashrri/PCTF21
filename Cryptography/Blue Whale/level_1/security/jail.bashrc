@@ -181,9 +181,11 @@ refuse() {
     return 1
 }
 
+export TMOUT=60
 export PATH=$HOME/commands
 export PS1='${debian_chroot:+($debian_chroot)}\[\e[1;32m\]cobb@\h\[\e[1;00m\]:\[\e[1;36m\]\w\[\e[1;00m\]:\[\e[1;31m\]\$\[\e[00m\] '
 
+readonly TMOUT
 readonly PATH
 readonly PS1
 readonly USER
@@ -200,6 +202,7 @@ alias eval='refuse eval'
 alias echo='refuse echo'
 alias printf='refuse printf'
 alias unalias='refuse unalias'
+alias ulimit='refuse ulimit'
 alias pwd='showonscreen "/home/cobb/jail"'
 alias bash='startshell'
 alias sh='startshell'

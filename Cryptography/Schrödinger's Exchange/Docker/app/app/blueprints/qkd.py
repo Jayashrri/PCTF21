@@ -2,11 +2,10 @@ from flask import Blueprint, request, jsonify
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from base64 import b64encode
-from random import sample
 from os import urandom
 import codecs
 
-def verify_params(params, logger) -> bool:
+def verify_params(params) -> bool:
     valid_len = 1024
     num_keys = 2
     valid_photons = [[1, 0], [0, 1], [0.707, -0.707], [0.707, 0.707]]
@@ -23,11 +22,7 @@ def verify_params(params, logger) -> bool:
             assert params['basis'][i] in valid_base
         return True
     except Exception as e:
-        logger.exception(str(e))
         return False
-
-def make_icecream() -> str:
-    return ''.join(sample(urandom(64), 64))
 
 key_distribution_blueprint = Blueprint('key_distribution', __name__)
 key_distribution_blueprint.config = {}
@@ -38,13 +33,11 @@ def record_params(setup_state):
 
 @key_distribution_blueprint.route('/flag', methods=['GET'])
 def distribute():
-    logger = key_distribution_blueprint.config['logger']
-
     try:
         if request.method == 'GET':
 
             params = request.get_json()
-            if not verify_params(params, logger):
+            if not verify_params(params):
                 return 'invalid parameters', 422
 
             for k in params.keys():
@@ -84,13 +77,17 @@ def distribute():
                 if is_local:
 
                     db = key_distribution_blueprint.config['db']
-                    icecream = make_icecream()
+                    icecream = urandom(32).hex()
                     while not db.save(icecream, e_basis):
-                        icecream = make_icecream()
+                        icecream = urandom(32).hex()
 
-                    ssh_password = key_distribution_blueprint.config['ssh_password']
+                    host = key_distribution_blueprint.config['ssh_host']
+                    port = key_distribution_blueprint.config['ssh_port']
+                    username = key_distribution_blueprint.config['ssh_username']
+                    password = key_distribution_blueprint.config['ssh_password']
+
                     response.headers["Eavesdropper-Bounced-But-Dropped-His-Icecream"] = icecream
-                    response.headers["Eavesdropper-Bounced-But-Dropped-His-Keys"] = ssh_password
+                    response.headers[f"Eavesdropper-Bounced-But-Dropped-His-Keys-For-{username}@{host}:{port}"] = password
 
                 else:
                     response.headers["You-Saw-Nothing"] = "only localhost is the all-seer"
@@ -98,5 +95,4 @@ def distribute():
         else:
             return 'method not implemented', 501
     except Exception as e:
-        logger.exception(str(e))
         return 'an unexpected error occurred', 500

@@ -1,10 +1,10 @@
 {
     "db": {
-        "host": "db",
+        "host": "",
         "user": "root",
         "password": "",
         "database": "",
-        "port": "3306",
+        "port": "",
         "id_table": "",
         "icecream_table": ""
     },

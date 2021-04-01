@@ -2,7 +2,7 @@ import mysql.connector
 
 class Actions:
 
-    def __init__(self, db_data, logger):
+    def __init__(self, db_data):
         db_host = db_data['host']
         db_user = db_data['user']
         db_password = db_data['password']
@@ -15,7 +15,6 @@ class Actions:
             self.cursor = self.db.cursor()
             self.create_table()
         except Exception as e:
-            logger.exception(str(e))
             raise
 
     def create_table(self) -> None:
@@ -36,8 +35,3 @@ class Actions:
         self.cursor.execute(cmd)
         self.db.commit()
         return True
-
-    def __del__(self) -> None:
-        self.db.commit()
-        self.cursor.close()
-        self.db.close()
