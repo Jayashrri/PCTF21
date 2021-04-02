@@ -6,14 +6,13 @@ import sys
 
 class Actions:
 
-    def __init__(self, config_data, logger):
+    def __init__(self, config_data):
         db_host = config_data['db']['host']
         db_user = config_data['db']['user']
         db_password = config_data['db']['password']
         db_name = config_data['db']['database']
         db_port = config_data['db']['port']
 
-        self.logger = logger
         self.id_table = config_data['db']['id_table']
         self.icecream_table = config_data['db']['icecream_table']
         self.admin = config_data['admin']
@@ -24,7 +23,6 @@ class Actions:
             self.table = self.table_name()
             self.create_table()
         except Exception as e:
-            self.logger.exception(str(e))
             raise Exception('AN UNEXPECTED ERROR OCCURRED.')
 
     def generate_hash(self, password) -> str:
@@ -61,7 +59,6 @@ class Actions:
             self.cursor.execute(cmd)
             self.db.commit()
         except Exception as e:
-            self.logger.exception(str(e))
             raise Exception(f'CANNOT CREATE TABLE \'{self.table}\'.')
 
     def delete_table(self) -> None:
@@ -71,7 +68,6 @@ class Actions:
             self.cursor.execute(cmd)
             self.db.commit()
         except Exception as e:
-            self.logger.exception(str(e))
             raise Exception(f'CANNOT DELETE TABLE \'{self.table}\'.')
 
     def exists(self, table, column, value) -> bool:
@@ -96,7 +92,6 @@ class Actions:
             self.db.commit()
             return cs("SIGNUP SUCCESSFUL!", "#66ff00").bold()
         except Exception as e:
-            self.logger.exception(str(e))
             return cs("SIGNUP FAILED!", "#ff0000").bold()
 
     def signin(self, params) -> (bool, bold):
@@ -119,7 +114,6 @@ class Actions:
             else:
                 return False, cs("INCORRECT PASSWORD", "#ff0000").bold()
         except Exception as e:
-            self.logger.exception(str(e))
             return False, cs("SIGNIN FAILED!", "#ff0000").bold()
 
     def signout(self) -> bold:
@@ -139,7 +133,6 @@ class Actions:
             assert all([True if sprinkle in '+x' else False for sprinkle in sprinkles])
             return sprinkles
         except Exception as e:
-            self.logger.exception(str(e))
             raise Exception('AN UNEXPECTED ERROR OCCURED WHILE CHECKING THE ICECREAM.')
 
     def close(self, sig, frame) -> None:

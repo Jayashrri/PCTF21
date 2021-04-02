@@ -72,7 +72,7 @@ What do we do with that text? Maybe it will spook the eavesdropper!
 ```python
 params = {'photons': photons, 'basis': basis}
 headers = {'I-See-What-You-Did-There': 'blah'}
-response = requests.get('http://example.com:xxxx', json=params, headers=headers)
+response = requests.get('http://example.com:xxxx/flag', json=params, headers=headers)
 data = json.loads(response.text)
 
 print(response.headers)
@@ -88,7 +88,7 @@ That's what the `X-Forwarded-For` HTTP header does. We can spoof our IP address 
 ```python
 params = {'photons': photons, 'basis': basis}
 headers = {'I-See-What-You-Did-There': 'blah', 'X-Forwarded-For': '127.0.0.1'}
-response = requests.get('http://example.com:xxxx', json=params, headers=headers)
+response = requests.get('http://example.com:xxxx/flag', json=params, headers=headers)
 data = json.loads(response.text)
 
 print(response.headers)

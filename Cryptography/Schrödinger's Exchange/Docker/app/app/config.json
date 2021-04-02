@@ -4,14 +4,17 @@
         "port": "80",
         "flag": "",
         "image_url": "",
+        "ssh_host": "",
+        "ssh_port": "",
+        "ssh_username": "",
         "ssh_password": ""
     },
     "db": {
-        "host": "db",
+        "host": "",
         "user": "root",
         "password": "",
         "database": "",
-        "port": "3306",
+        "port": "",
         "icecream_table": ""
     }
 }

@@ -1,39 +1,40 @@
-version: '3.8'
+version: '3.3'
 services:
-  db:
-    build:
-      context: ./db
-      args:
-        - DB_NAME
-        - DB_ROOT_PASSWORD
-    image: pctf21_schrodinger_db:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "${DB_NAME}"
-      MYSQL_USER: root
-      MYSQL_PASSWORD: "${DB_ROOT_PASSWORD}"
-  
+#  db:
+#    build:
+#      context: ./db
+#      args:
+#        - DB_NAME
+#        - DB_ROOT_PASSWORD
+#    image: pctf21_schrodinger_db:latest
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+#      MYSQL_DATABASE: "${DB_NAME}"
+
   app:
     build:
       context: ./app
       args:
         - FLAG
         - IMAGE_URL
-        - USER_PASSWORD
+        - SSH_HOST
+        - SSH_PORT
+        - SSH_USERNAME
+        - SSH_USER_PASSWORD
+        - DB_HOST
+        - DB_PORT
         - DB_NAME
         - DB_ROOT_PASSWORD
         - DB_ICECREAM_TABLE
     image: pctf21_schrodinger_app:latest
-    volumes:
-      - ./logs/app.log:/root/app/app.log
-    depends_on:
-      - db
+#    depends_on:
+#      - db
     restart: always
     environment:
       DEBIAN_FRONTEND: noninteractive
     ports:
-      - "4000:80"
+      - "${APP_PORT}:80"
   
   ssh:
     build:
@@ -43,6 +44,8 @@ services:
         - SSH_USERNAME
         - SSH_ROOT_PASSWORD
         - SSH_USER_PASSWORD
+        - DB_HOST
+        - DB_PORT
         - DB_NAME
         - DB_ROOT_PASSWORD
         - DB_ID_TABLE
@@ -51,19 +54,18 @@ services:
         - ADMIN_EMAIL
         - ADMIN_PASSWORD
     image: pctf21_schrodinger_ssh:latest
-    volumes:
-      - ./logs/ssh.log:/home/${SSH_USERNAME}/shell/shell.log
     depends_on:
-      - db
+#      - db
       - app
     restart: always
     tty: true
+    privileged: true
     environment:
       DEBIAN_FRONTEND: noninteractive
     cap_add:
       - NET_ADMIN
     ports:
-      - "4001:22"
+      - "${SSH_PORT}:22"
 
 networks:
   default:
