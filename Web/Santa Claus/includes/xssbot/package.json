@@ -5,14 +5,14 @@
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"debug": "DEBUG=zombie node app.js",
-		"prod": "node app.js"
+		"debug": "DEBUG=zombie node childbot.js"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.12.2",
+		"tree-kill": "^1.2.2",
 		"zombie": "^6.1.4"
 	}
 }

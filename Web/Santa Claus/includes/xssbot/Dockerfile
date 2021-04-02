@@ -9,4 +9,4 @@ RUN npm i
 COPY . .
 
 
-CMD [ "npm", "run", "prod" ]
+CMD [ "./runbot.sh" ]
