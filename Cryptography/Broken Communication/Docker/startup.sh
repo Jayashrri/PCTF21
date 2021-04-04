@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-ncat -lvp port -e "/usr/bin/python3 /app/question.py"
+ncat -lvp port --keep-open -e "/usr/bin/python3 /app/question.py" 2>/dev/null
