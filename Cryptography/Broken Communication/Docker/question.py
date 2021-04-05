@@ -28,33 +28,37 @@ n_weiner = 661278667493829904934771632764306444536476956243349951880864561006699
 ct_weiner = 29011448789667532500837595094422622999346838322373796961790056538252836540674940341482440624300758342622263016622113051092443575971982039553506690891613127725265256864590070304002132576852701354498100266486254744700180750140575252713000370458690255315552316726371428502751910185791602824967813578414846467186
 
 p, q, e, d, t, n = keyGen()
-choice = input(
-    "Press 1 to decrypt the code and 2 to send the decrypted code to the server: ")
-print("\n")
-
-if (choice == "1"):
-    try:
-        msg = bytes.fromhex(input("Enter your cipher (hex only): "))
-        print("\n")
-        print("Your decrypted message (in hex): ", (decrypt(msg, d, n)).hex())
-        print("\n")
-    except:
-        print("Please enter a valid cipher")
-
-elif (choice == "2"):
-    try:
-        msg = input("Enter your message (plain text): ")
-        if (msg == "SECRET_CODE{7865}"):
+try:
+    choice = input(
+        "Press 1 to decrypt the code and 2 to send the decrypted code to the server: ")
+    print("\n")
+    if (choice == "1"):
+        try:
+            msg = bytes.fromhex(input("Enter your cipher (hex only): "))
             print("\n")
-            print("Flag for user with e,n is: ")
-            print("e: ", e_weiner)
-            print("n: ", n_weiner)
-            print("FLAG: ", ct_weiner)
+            print("Your decrypted message (in hex): ",
+                  (decrypt(msg, d, n)).hex())
             print("\n")
-        else:
-            print("Sorry the code did not match!")
-    except:
-        print("Invalid format")
+        except:
+            print("Please enter a valid cipher")
 
-else:
-    print("Invalid option!")
+    elif (choice == "2"):
+        try:
+            msg = input("Enter your message (plain text): ")
+            if (msg == "SECRET_CODE{7865}"):
+                print("\n")
+                print("Flag for user with e,n is: ")
+                print("e: ", e_weiner)
+                print("n: ", n_weiner)
+                print("FLAG: ", ct_weiner)
+                print("\n")
+            else:
+                print("Sorry the code did not match!")
+        except:
+            print("Invalid format")
+
+    else:
+        print("Invalid option!")
+
+except Exception as e:
+    print(e)
