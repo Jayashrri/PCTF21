@@ -87,7 +87,7 @@ def distribute():
                     password = key_distribution_blueprint.config['ssh_password']
 
                     response.headers["Eavesdropper-Bounced-But-Dropped-His-Icecream"] = icecream
-                    response.headers[f"Eavesdropper-Bounced-But-Dropped-His-Keys-For-{username}@{host}:{port}"] = password
+                    response.headers[f"Eavesdropper-Bounced-But-Dropped-His-Keys-For-{username}@{host}-Port-{port}"] = password
 
                 else:
                     response.headers["You-Saw-Nothing"] = "only localhost is the all-seer"
