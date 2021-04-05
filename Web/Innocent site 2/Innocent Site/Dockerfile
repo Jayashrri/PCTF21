@@ -1,6 +1,7 @@
 FROM node:slim
 
 RUN apt update -y && apt upgrade -y
+RUN apt install dnsutils -y
 
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
 
