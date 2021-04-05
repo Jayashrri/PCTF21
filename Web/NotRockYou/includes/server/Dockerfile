@@ -1,6 +1,6 @@
 FROM node:latest
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/notrockyou
 
 COPY package.json .
 

@@ -1,0 +1,8 @@
+module.exports = {
+	adminEmail: "admin1337bs@beautifulsites.com",
+	adminPassword: "",
+	mongoString: "?authSource=admin",
+	baseURL: "FRONTEND_URL_WITHOUT_SLASH_IN_END",
+	jwtSecret: "SECRET",
+	seconds: INT_SECS_TO_WAIT,
+};

@@ -1,0 +1,153 @@
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+   10
+   11
+   12
+   13
+   14
+   15
+   16
+   17
+   18
+   19
+   20
+   21
+   22
+   23
+   24
+   25
+   26
+   27
+   28
+   29
+   30
+   31
+   32
+   33
+   34
+   35
+   36
+   37
+   38
+   39
+   40
+   41
+   42
+   43
+   44
+   45
+   46
+   47
+   48
+   49
+   50
+   51
+   52
+   53
+   54
+   55
+   56
+   57
+   58
+   59
+   60
+   61
+   62
+   63
+   64
+   65
+   66
+   67
+   68
+   69
+   70
+   71
+   72
+   73
+   74
+   75
+   76</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span> 
+   <span style="color: #007020">session_start</span>();
+   
+   <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">isset</span>(<span style="color: #996633">$_POST</span>) <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span><span style="color: #008800; font-weight: bold">empty</span>(<span style="color: #996633">$_POST</span>)){
+       <span style="color: #007020">extract</span>(<span style="color: #996633">$_POST</span>);
+       <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;dbconn.php&quot;</span>;
+       <span style="color: #996633">$code</span> <span style="color: #333333">=</span> mysqli_real_escape_string(<span style="color: #996633">$conn</span>,<span style="color: #996633">$actcode</span>);
+   
+       <span style="color: #996633">$sql</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;SELECT * FROM `activation` WHERE `code` LIKE &#39;</span><span style="background-color: #eeeeee">$code</span><span style="background-color: #fff0f0">&#39;&quot;</span>;
+   
+       <span style="color: #996633">$result</span><span style="color: #333333">=</span>mysqli_query(<span style="color: #996633">$conn</span>,<span style="color: #996633">$sql</span>);
+       <span style="color: #996633">$codes</span><span style="color: #333333">=</span> mysqli_fetch_all(<span style="color: #996633">$result</span>,MYSQLI_ASSOC);
+       
+       <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #008800; font-weight: bold">empty</span>(<span style="color: #996633">$codes</span>)){
+           <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Invalid Code&quot;</span>;
+       }
+       <span style="color: #008800; font-weight: bold">else</span> {
+           <span style="color: #996633">$codeDetails</span> <span style="color: #333333">=</span> <span style="color: #996633">$codes</span>[<span style="color: #0000DD; font-weight: bold">0</span>];
+           <span style="color: #008800; font-weight: bold">if</span>((int)<span style="color: #996633">$codeDetails</span>[<span style="background-color: #fff0f0">&#39;used&#39;</span>] <span style="color: #333333">===</span> <span style="color: #0000DD; font-weight: bold">1</span> ){
+               <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Code is used. Buy new one&quot;</span>;
+           }
+           <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #996633">$codeDetails</span>[<span style="background-color: #fff0f0">&#39;code&#39;</span>]<span style="color: #333333">===</span><span style="color: #996633">$code</span>) {
+               <span style="color: #996633">$userId</span> <span style="color: #333333">=</span> <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&#39;userId&#39;</span>];
+               <span style="color: #996633">$sql</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;UPDATE `users` SET `isPremium` = &#39;1&#39; WHERE `users`.`id` = </span><span style="background-color: #eeeeee">$userId</span><span style="background-color: #fff0f0">&quot;</span>;
+               
+               <span style="color: #008800; font-weight: bold">if</span>(mysqli_query(<span style="color: #996633">$conn</span>, <span style="color: #996633">$sql</span>)){
+                   <span style="color: #996633">$codeId</span> <span style="color: #333333">=</span> <span style="color: #996633">$codeDetails</span>[<span style="background-color: #fff0f0">&#39;id&#39;</span>];
+                   <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&#39;isPremium&#39;</span>] <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;1&#39;</span>;
+                   <span style="color: #996633">$sql</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;UPDATE `activation` SET `used` = &#39;1&#39; WHERE `activation`.`id` = </span><span style="background-color: #eeeeee">$codeId</span><span style="background-color: #fff0f0"> &quot;</span>;
+                   <span style="color: #008800; font-weight: bold">if</span>(mysqli_query(<span style="color: #996633">$conn</span>, <span style="color: #996633">$sql</span>))
+                       header(<span style="background-color: #fff0f0">&quot;Location: memes.php&quot;</span>);
+                   <span style="color: #008800; font-weight: bold">else</span> 
+                       <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Error updating codes&quot;</span>;
+               }
+               <span style="color: #008800; font-weight: bold">else</span> {
+                   <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Error processing request try contacting admin&quot;</span>;
+               }
+           }
+       }
+   }
+   
+   <span style="color: #557799">?&gt;</span>
+   
+   <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;header.php&quot;</span>; <span style="color: #557799">?&gt;</span>
+   
+   &lt;div class=&quot;container&quot;&gt;
+       &lt;div class=&quot;row my-3&quot;&gt;
+           &lt;div class=&quot;col&quot;&gt;
+               &lt;h2&gt; Thanks for purchasing our product &lt;/h2&gt;       
+           &lt;/div&gt;
+       &lt;/div&gt;
+       &lt;div class=&quot;row&quot;&gt;
+           &lt;div class=&quot;col&quot;&gt;
+               &lt;form action=&quot;<span style="color: #557799">&lt;?</span> <span style="color: #008800; font-weight: bold">echo</span> <span style="color: #996633">$_SERVER</span>[<span style="background-color: #fff0f0">&#39;PHP_SELF&#39;</span>] <span style="color: #557799">?&gt;</span>&quot; method=&quot;POST&quot;&gt;
+                   &lt;label&gt;
+                       Enter your super secret activation code bought from our stores: 
+                       &lt;input name=&quot;actcode&quot; type=&quot;text&quot; required&gt;
+                   &lt;/label&gt; 
+                   &lt;input type=&quot;submit&quot; name=&quot;submit&quot;  value=&quot;Submit&quot;&gt;   
+               &lt;/form&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+   
+   &lt;/div&gt;
+   
+   &lt;div class=&quot;container&quot;&gt;
+       &lt;div class=&quot;row justify-content-center&quot;&gt;
+           &lt;div class=&quot;col-1 my-5&quot;&gt;
+               &lt;a href=&quot;logout.php&quot; class=&quot;btn btn-primary&quot;&gt;Logout&lt;/a&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+   &lt;/div&gt;
+   
+   <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;footer.php&quot;</span>; <span style="color: #557799">?&gt;</span>
+   
+   &lt;!-- /sources/buy.html --&gt;
+   </pre></td></tr></table></div>
+   

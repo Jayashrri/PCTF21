@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 					});
 					res.redirect("/jobs");
 				} else {
-					res.send("wring pass");
+					res.send("wrong password");
 				}
 			});
 		}

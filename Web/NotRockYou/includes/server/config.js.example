@@ -1,0 +1,8 @@
+module.exports = {
+	PORT: PORT,
+	jwtsecret: "SECRET",
+	mongostring: "MONGOSTRING",
+	frontendURL: "http://localhost:8000",
+	cookieExpTime: EXP_TIME,
+	adminpassword: "test",
+};

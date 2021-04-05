@@ -1,0 +1,12 @@
+{
+	"PORT": 8000,
+	"mongoString": "?authSource=admin",
+	"bcrypt": {
+		"saltRounds": 10
+	},
+	"jwtSecret": "SECRET",
+	"cookieExpTime": 600000,
+	"adminEmail": "admin1337bs@beautifulsites.com",
+	"adminPassword": "",
+	"flag": "P_CTF{This is sample flag}"
+}
