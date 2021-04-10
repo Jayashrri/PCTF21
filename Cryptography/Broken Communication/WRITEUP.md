@@ -8,7 +8,7 @@ The main attack is as follows:
 
 ```python
 flag = "1"  # The last bit obtained is 1 (when you decrypt for the very first time.)
-for i in range(1,136):
+while True:
 	p,q,e,d,t,n = keyGen()  # To solve this problem we do not require p,q and it would not be mentioned too.
 	flag_enc = encrypt(message,e,n)
 	inv = inverse(2**i, n)
