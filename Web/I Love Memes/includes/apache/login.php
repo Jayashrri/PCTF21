@@ -51,10 +51,10 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === "y" ){
         <div class="col-5">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
             <label class="my-1">
-                Username <input type="text" name="username">
+                Username <input type="text" name="username" required>
             </label>
             <label class="my-1">
-                Password <input type="password" name="password">
+                Password <input type="password" name="password" required>
             </label>
             <label class="my-1">
                 <input type="submit" name="submit" value="Login">

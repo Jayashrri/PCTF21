@@ -1,4 +1,19 @@
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+<!-- HTML generated using hilite.me -->
+<div
+	style="
+		background: #ffffff;
+		overflow: auto;
+		width: auto;
+		border: solid gray;
+		border-width: 0.1em 0.1em 0.1em 0.8em;
+		padding: 0.2em 0.6em;
+	"
+>
+	<table>
+		<tr>
+			<td>
+				<pre style="margin: 0; line-height: 125%">
+ 1
     2
     3
     4
@@ -73,21 +88,36 @@
    73
    74
    75
-   76</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span> 
+   76
+   77
+   78
+   79
+   80
+   81</pre
+				>
+			</td>
+			<td>
+				<pre
+					style="margin: 0; line-height: 125%"
+				><span style="color: #557799">&lt;?php</span> 
    <span style="color: #007020">session_start</span>();
+   
+   <span style="color: #008800; font-weight: bold">if</span>((<span style="color: #333333">!</span><span style="color: #007020">isset</span>(<span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&quot;loggedin&quot;</span>]) <span style="color: #333333">&amp;&amp;</span> <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&quot;loggedin&quot;</span>]<span style="color: #333333">!==</span><span style="background-color: #fff0f0">&quot;y&quot;</span>) <span style="color: #333333">||</span> <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&#39;isPremium&#39;</span>] <span style="color: #333333">===</span> <span style="background-color: #fff0f0">&#39;1&#39;</span>  ){
+       header(<span style="background-color: #fff0f0">&quot;Location: index.php&quot;</span>);
+   }
    
    <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #007020">isset</span>(<span style="color: #996633">$_POST</span>) <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span><span style="color: #008800; font-weight: bold">empty</span>(<span style="color: #996633">$_POST</span>)){
        <span style="color: #007020">extract</span>(<span style="color: #996633">$_POST</span>);
        <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;dbconn.php&quot;</span>;
        <span style="color: #996633">$code</span> <span style="color: #333333">=</span> mysqli_real_escape_string(<span style="color: #996633">$conn</span>,<span style="color: #996633">$actcode</span>);
    
-       <span style="color: #996633">$sql</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;SELECT * FROM `activation` WHERE `code` LIKE &#39;</span><span style="background-color: #eeeeee">$code</span><span style="background-color: #fff0f0">&#39;&quot;</span>;
+       <span style="color: #996633">$sql</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;SELECT * FROM `activation` WHERE `code` = &#39;</span><span style="background-color: #eeeeee">$code</span><span style="background-color: #fff0f0">&#39;&quot;</span>;
    
        <span style="color: #996633">$result</span><span style="color: #333333">=</span>mysqli_query(<span style="color: #996633">$conn</span>,<span style="color: #996633">$sql</span>);
        <span style="color: #996633">$codes</span><span style="color: #333333">=</span> mysqli_fetch_all(<span style="color: #996633">$result</span>,MYSQLI_ASSOC);
        
        <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #008800; font-weight: bold">empty</span>(<span style="color: #996633">$codes</span>)){
-           <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Invalid Code&quot;</span>;
+           <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Code is invalid.&quot;</span>;
        }
        <span style="color: #008800; font-weight: bold">else</span> {
            <span style="color: #996633">$codeDetails</span> <span style="color: #333333">=</span> <span style="color: #996633">$codes</span>[<span style="color: #0000DD; font-weight: bold">0</span>];
@@ -97,7 +127,6 @@
            <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #996633">$codeDetails</span>[<span style="background-color: #fff0f0">&#39;code&#39;</span>]<span style="color: #333333">===</span><span style="color: #996633">$code</span>) {
                <span style="color: #996633">$userId</span> <span style="color: #333333">=</span> <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&#39;userId&#39;</span>];
                <span style="color: #996633">$sql</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;UPDATE `users` SET `isPremium` = &#39;1&#39; WHERE `users`.`id` = </span><span style="background-color: #eeeeee">$userId</span><span style="background-color: #fff0f0">&quot;</span>;
-               
                <span style="color: #008800; font-weight: bold">if</span>(mysqli_query(<span style="color: #996633">$conn</span>, <span style="color: #996633">$sql</span>)){
                    <span style="color: #996633">$codeId</span> <span style="color: #333333">=</span> <span style="color: #996633">$codeDetails</span>[<span style="background-color: #fff0f0">&#39;id&#39;</span>];
                    <span style="color: #996633">$_SESSION</span>[<span style="background-color: #fff0f0">&#39;isPremium&#39;</span>] <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;1&#39;</span>;
@@ -110,6 +139,8 @@
                <span style="color: #008800; font-weight: bold">else</span> {
                    <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Error processing request try contacting admin&quot;</span>;
                }
+           } <span style="color: #008800; font-weight: bold">else</span> {
+               <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Code is invalid.&quot;</span>;
            }
        }
    }
@@ -149,5 +180,8 @@
    <span style="color: #557799">&lt;?php</span> <span style="color: #008800; font-weight: bold">require</span> <span style="background-color: #fff0f0">&quot;footer.php&quot;</span>; <span style="color: #557799">?&gt;</span>
    
    &lt;!-- /sources/buy.html --&gt;
-   </pre></td></tr></table></div>
-   
+   </pre>
+			</td>
+		</tr>
+	</table>
+</div>

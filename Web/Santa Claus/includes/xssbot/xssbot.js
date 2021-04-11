@@ -73,7 +73,7 @@ const main = async () => {
 			if (err) return console.log(err);
 			console.log("Payloads found");
 		});
-
+		console.log(Date());
 		const seconds = config.seconds;
 		const baseURL = config.baseURL;
 		const fullURL = `${baseURL}/finalpreview?name=${payload.name}&dob=${payload.dob}&education=${payload.education}&job=${payload.job}&submit=Submit`;

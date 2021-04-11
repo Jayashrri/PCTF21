@@ -1,35 +1,35 @@
 version: "3.9"
 services:
-  webserver:
-    build: ./
-    restart: always
-    container_name: apache_server_c4
-    ports:
-      - "8000:80"
-    volumes:
-      - ./apache:/var/www/html
-  db:
-    image: mysql
-    restart: always
-    container_name: mysql_db
-    environment:
-      MYSQL_DATABASE: pctfenc
-      MYSQL_ROOT_PASSWORD: secpass
-    volumes:
-      - ./sql/config:/etc/mysql/conf.d
-      - ./sql/dumps:/docker-entrypoint-initdb.d
-      - ./sql/data:/var/lib/mysql
-    ports:
-      - "8500:3306"
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    container_name: phpma
-    restart: always
-    ports:
-      - '8081:80'
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
+    webserver:
+        build: ./
+        restart: always
+        container_name: apache_server_c4
+        ports:
+            - "8000:80"
+        volumes:
+            - ./apache:/var/www/html
+    db:
+      image: mysql
+      restart: always
+      container_name: mysql_db
+      environment:
+        MYSQL_DATABASE: pctfenc
+        MYSQL_ROOT_PASSWORD: secpass
+      volumes:
+        - ./sql/config:/etc/mysql/conf.d
+        - ./sql/dumps:/docker-entrypoint-initdb.d
+        - ./sql/data:/var/lib/mysql
+      ports:
+        - "8500:3306"
+    phpmyadmin:
+      depends_on:
+        - db
+      image: phpmyadmin/phpmyadmin
+      container_name: phpma
+      restart: always
+      ports:
+        - '8081:80'
+      environment:
+        PMA_HOST: db
+        PMA_PORT: 3306
+        PMA_ARBITRARY: 1

@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]!=="y"){
+if((!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]!=="y") || $_SESSION['isPremium'] === '1'  ){
     header("Location: index.php");
 }
 
@@ -10,13 +10,13 @@ if(isset($_POST) && !empty($_POST)){
     require "dbconn.php";
     $code = mysqli_real_escape_string($conn,$actcode);
 
-    $sql = "SELECT * FROM `activation` WHERE `code` LIKE '$code'";
+    $sql = "SELECT * FROM `activation` WHERE `code` = '$code'";
 
     $result=mysqli_query($conn,$sql);
     $codes= mysqli_fetch_all($result,MYSQLI_ASSOC);
     
     if(empty($codes)){
-        echo "Invalid Code";
+        echo "Code is invalid.";
     }
     else {
         $codeDetails = $codes[0];
@@ -26,7 +26,6 @@ if(isset($_POST) && !empty($_POST)){
         else if($codeDetails['code']===$code) {
             $userId = $_SESSION['userId'];
             $sql = "UPDATE `users` SET `isPremium` = '1' WHERE `users`.`id` = $userId";
-            
             if(mysqli_query($conn, $sql)){
                 $codeId = $codeDetails['id'];
                 $_SESSION['isPremium'] = '1';
@@ -39,6 +38,8 @@ if(isset($_POST) && !empty($_POST)){
             else {
                 echo "Error processing request try contacting admin";
             }
+        } else {
+            echo "Code is invalid.";
         }
     }
 }
