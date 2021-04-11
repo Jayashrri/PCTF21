@@ -12,7 +12,7 @@ Since, this is supposed to be an easy password, we can crack it by cracking the 
 
 ## Third question
 
-We can find out that the application which was installed is **Tor Browser**. One way to find this out would be the setup file in the Downloads folder which wasn't deleted. For the timestamp, we cannot use event logs as Tor's installer doesn't log installation by default. One way to do this would be to look at the **ShellBags**, which are registry subkeys located in **UsrClass.dat** and **NTUSER.dat** (both at **C:\Users\\(username)**) used primarily to store the folder view settings for Explorer. This also stores folder creation timestamps even for the deleted folders such as the program files for Tor Browser. We can use an application such as the one [here](https://ericzimmerman.github.io/#!index.md) called **'ShellBags Explorer'** to parse this and obtain the timestamp:
+We can find out that the application which was installed is **Tor Browser**. One way to find this out would be the setup file in the Downloads folder which wasn't deleted. For the timestamp, we cannot use event logs or registry keys as Tor's installer doesn't log installation by default. One way to do this would be to look at the **ShellBags**, which are registry subkeys located in **UsrClass.dat** and **NTUSER.dat** (both at **C:\Users\\(username)**) used primarily to store the folder view settings for Explorer. This also stores folder creation timestamps even for the deleted folders such as the program files for Tor Browser. We can use an application such as the one [here](https://ericzimmerman.github.io/#!index.md) called **'ShellBags Explorer'** to parse this and obtain the timestamp:
 
 ![installation-time](https://imgur.com/wobyQDw.png)
 
