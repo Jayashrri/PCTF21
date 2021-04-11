@@ -60,9 +60,9 @@ scalar = hex(scalar)[2:]
 ```
 
 But now the server refuses to give the flag with a message and the link to a password protected archive.
-Note that the message is 16 bytes long and the scalar is of 16 bytes.
-A possible solution might be to XOR the message and the scalar together and submit the resulting hex value as password.
-Luckily this works and we get the flag.
+Note that the message is 64 bytes long and the scalar is of 16 bytes.
+XOR the message and the scalar together and submit the resulting hex value as password.
+This works and we get the flag.
 
 ```python
 def xor(p, q):

@@ -44,7 +44,7 @@ print(flag_pt)
 The result is not as expected. Did we calculate the wrong encryption key? Obviously.
 But how? The above method is what the BB84 protocol states.
 
-Lets make a GET request once more and see it more closely.
+Make a GET request once more and see it more closely.
 
 ```python
 params = {'photons': photons, 'basis': basis}
@@ -54,12 +54,12 @@ data = json.loads(response.text)
 print(response.headers)
 ```
 
-Aha! There is some weird text in Set-Cookie header. You know what, its a ROT-13 cipher.
+Aha! There is some weird text in Set-Cookie header. Its a ROT-13 cipher.
 It decodes to a URL to this image:
 
 ![eavesdropper](./images/eavesdropper.jpg)
 
-This image has a watermark at bottom-left which says: `i see what you did there`
+This image has a watermark at bottom-left which says: `I-See-What-You-Did-There`
 Clearly the person in the image resembles an eavesdropper and now it adds up.
 
 There is an eavesdropper in the key distribution channel who is intercepting our photons.
@@ -67,7 +67,7 @@ But because of the no-cloning theorem, he/she will never calculate the exact sam
 
 So the only way to crack this is by knowing the basis used by the eavesdropper.
 
-What do we do with that text? Maybe it will spook the eavesdropper!
+Send that text as a header.
 
 ```python
 params = {'photons': photons, 'basis': basis}
@@ -80,10 +80,8 @@ print(response.headers)
 
 Now there is another headers in response: `You-Saw-Nothing: only localhost is the all-seer`
 So it means that this request will get us something useful only when it is made by the localhost itself.
-But how can we do that? We are not the ones hosting this CTF!
 
-Actually, we just have to make the server believe that the request is coming from localhost.
-That's what the `X-Forwarded-For` HTTP header does. We can spoof our IP address using this.
+That's where the `X-Forwarded-For` HTTP header is useful.
 
 ```python
 params = {'photons': photons, 'basis': basis}
@@ -94,22 +92,14 @@ data = json.loads(response.text)
 print(response.headers)
 ```
 
-Boom! We spooked the eavesdropper and now we get two new headers:
 *   `Eavesdropper-Bounced-But-Dropped-His-Icecream: 61cbc548dfcb4e99eeaf5b5ee83953aa4d3c3bc20ba7c235aca85d86c4fa9bbf` 
-*   `Eavesdropper-Bounced-But-Dropped-His-Keys: "some string"`
+*   `Eavesdropper-Bounced-But-Dropped-His-Keys-For-p_ctf@example.com-Port-xxxx: "some string"`
 
 Keep these in the back of our minds for now.
-Check if there is any other service running on the host other than HTTP listener.
-This can be done easily by using `nmap`.
-
-So there is one SSH service too. Lets goooooooo!!!!
 
 ```bash
 ssh username@host -p xxxx
 ```
-
-The password is that key which our frightened eavesdropper dropped along with his icecream :(
-We are greeted as follows:
 
 ```
 ------------------------------ sniffer-force.onion -----------------------------

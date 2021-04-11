@@ -33,7 +33,7 @@ Viewing the wave in Freuency View (log scale) gives -
 
 ![Hidden Message](./images/hidden-message.png)
 
-It says "ADRENALINE-SAITO-GUAM-THAI" which rhymes with "ADENINE-CYTOSINE-GUANINE-THYMINE".
+It says "ADRENALINE-SAITO-GUAM-THAI" which is "ADENINE-CYTOSINE-GUANINE-THYMINE".
 These are amino acids in out DNA so it is pointing towards [DNA Cryptography](https://www.geeksforgeeks.org/dna-cryptography/).
 
 Taking a look back at the decoded text we got from the gibberish we realize that it contains only four alphabets - d, e, k, z.
