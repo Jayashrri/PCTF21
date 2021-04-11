@@ -5,7 +5,7 @@ We have the memory dump of Mark's PC and a file ```confidential.pdf``` which was
 ## Analysing the memory dump
 
 ```bash
-vol.py -f trustissues.raw imageinfo
+$ vol.py -f trustissues.raw imageinfo
 Volatility Foundation Volatility Framework 2.6
 INFO    : volatility.debug    : Determining profile based on KDBG search...
           Suggested Profile(s) : Win7SP1x64, Win7SP0x64, Win2008R2SP0x64, Win2008R2SP1x64_23418, Win2008R2SP1x64, Win7SP1x64_23418
@@ -73,22 +73,18 @@ for( ${i}     =     0  ;    ${D`UmP}[${I}];    ${I}++ )
 
 We see an obfuscated script which does hella lot more than just download chrome. On deobfuscating it, we can see that it is converting a file at ```D:\Bitlo*``` into a hexdump and sending it as DNS requests using ```nslookup``` command part by part. This is some sort of a (n00bish) DNS exfiltration attack, performed by the sysadmin who gave these files. (You could have also easily been tipped off by the ```nslookup.exe``` processes in pslist or pstree)
 
-We are also not able to dump nor scan the files in ```D:\```. One way to get the files would be to carve the packets out of the memory dump. You can either use caploader in Windows or you could find third party plugins for volatility such as ethscan or the one used [here](https://github.com/Memoryforensics/carve_packets).
+We are also not able to dump nor scan the files in ```D:\```. One way to get the files would be to carve the packets out of the memory dump. You can either use caploader in Windows or you could find third party plugins for volatility such as the one used [here](https://github.com/Memoryforensics/carve_packets).
 
 ```bash
 vol.py --plugins=carve_packets -f trustissues.raw --profile=Win7SP1x64 networkpackets -D .
 ```
 
-The packets are dumped at ```packets.pcap```. Let us open it in wireshark:
+The packets are dumped at ```packets.pcap```.
 
-![Wireshark](https://imgur.com/7lFkFwh.png)
-
-We can see that there is a pattern of query responses of DNS TXID = 2 followed by a Server failure (as it does not correspond to any IP; but note that it is enough for the data to reach the attacker's name server as a query) of TXID = 3 and a No such name response of TXID = 1. Hence for filtering out the hex data, ```dns.id == 2``` is a sufficient filter in our case.
-
-Let us use tshark for this as it is easier to work with in command line:
+Let us use tshark to filter out the hex data as follows:
 
 ```bash
- tshark -Y "dns.id == 2" -T fields -e "dns.qry.name"  -r packets.pcap | cut -d '.' -f1 |xxd -r -p
+$ tshark -Y "dns.id == 2" -T fields -e "dns.qry.name"  -r packets.pcap | cut -d '.' -f1 |xxd -r -p
 tLocker protected drive.
 
 To verify that this is the correct recovery key compare the identification with what is presented on the recovery screen.
@@ -106,12 +102,14 @@ The recovery key is used to recover the data on a Bi
 
 Thus, we have obtained a BitLocker recovery key (packets are disarranged here) which can be used to unlock a drive.
 
+Another way to do this would be to dump the memory of powershell or the nslookup processes and search for relevant strings (bitlocker, requestbin, etc).
+
 ## Analysing the PDF
 
 It is strange that a 5 page pdf has a size of roughly 81 MB. Let us see what is in this:
 
 ```bash
- binwalk confidential.pdf 
+$ binwalk confidential.pdf 
 
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
@@ -124,7 +122,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 We got a ZIP PDF polyglot. On unzipping the PDF, we get the VHD file.
 
 ```bash
-fdisk -l confidential.vhd
+$ fdisk -l confidential.vhd
 Disk confidential.vhd: 80 MiB, 83886592 bytes, 163841 sectors
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
@@ -139,12 +137,12 @@ confidential.vhd1        128 157823  157696  77M  7 HPFS/NTFS/exFAT
 We have the mountable drive starting at offset ```$((512*128)) = 65536```.
 
 ```bash
-dd if=confidential.vhd of=mountable.dd bs=65536 skip=1
+$ dd if=confidential.vhd of=mountable.dd bs=65536 skip=1
 1279+1 records in
 1279+1 records out
 83821056 bytes (84 MB, 80 MiB) copied, 0.128413 s, 653 MB/s
 
-file mountable.dd
+$ file mountable.dd
 mountable.dd: DOS/MBR boot sector, code offset 0x58+2, OEM-ID "-FVE-FS-", sectors/cluster 8, reserved sectors 0, Media descriptor 0xf8, sectors/track 63, heads 255, hidden sectors 128, FAT (32 bit), sectors/FAT 8160, serial number 0x0, unlabeled; NTFS, sectors/track 63, physical drive 0x1fe0, $MFT start cluster 393217, serial number 02020454d414e204f, checksum 0x41462020
 ```
 
@@ -153,21 +151,19 @@ This is a BitLocker encrypted drive as indicated by the ```-FVE-FS-``` header. M
 ## Getting the flag
 
 ```bash
-mkdir mountpoint
+$ mkdir mountpoint
 
-bdemount -r 299981-297792-361471-261789-114642-633501-520685-433719 mountable.dd mountpoint/
+$ bdemount -r 299981-297792-361471-261789-114642-633501-520685-433719 mountable.dd mountpoint/
 
-cp mountpoint/bde1 .
+$ cp mountpoint/bde1 .
 
-chmod 777 bde1
+$ mkdir new_mountpoint
 
-mkdir new_mountpoint
+$ mount bde1 new_mountpoint
 
-mount bde1 new_mountpoint
-
-ls new_mountpoint/
+$ ls new_mountpoint/
 'System Volume Information'  'Technical Business Document.docx'   flag.txt
 
-cat new_mountpoint/flag.txt
+$ cat new_mountpoint/flag.txt
 p_ctf{1_wi$h_y0u_DNSee_th3_kEy}
 ```

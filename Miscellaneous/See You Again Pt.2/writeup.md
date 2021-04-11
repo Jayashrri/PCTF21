@@ -1,7 +1,5 @@
 # See You Again Pt.2
 
-There is not much of information we can get from this picture. Immediate reverse search does not seem to work on this.
-
 Since he went on a vacation, we can try to check his Google Calendar for related events; but we can do that only if the calendar is public. The public Google Calendar of a person can be checked from URLs of this format: <https://calendar.google.com/calendar/u/0/embed?src=jakegodfreyb4c43717@gmail.com>
 Luckily, his calendar is public and we find the event **'Flight to NZ'**. Thus, we can now narrow down our location to New Zealand.
 
