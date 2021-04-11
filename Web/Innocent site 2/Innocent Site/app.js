@@ -12,13 +12,13 @@ var app = express();
 
 app.use(helmet({
     contentSecurityPolicy: false,
-}))
+}));
 app.use(logger('dev'));
 app.use(express.json({limit: '500'}));
 app.use(cookieParser());
 app.disable('x-powered-by');
 app.disable('etag');
-app.set('trust proxy', 'loopback');
+app.set('trust proxy', 'uniquelocal');
 
 app.use('/', indexRouter);
 

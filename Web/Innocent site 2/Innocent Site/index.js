@@ -121,7 +121,7 @@ router.get('/index.html', rateLimiter, speedLimiter, async function (req, res, n
         ip = ip.substr(7)
       }
       try {
-        googlebot = await reverseDNSLookup(ip, 'google.com', 'googlebot.com');
+        googlebot = await reverseDNSLookup(ip);
       } catch (e) {
         googlebot = false;
       }
